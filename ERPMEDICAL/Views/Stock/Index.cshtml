@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="app-container">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel">
+
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+
+                    <h2 class="panel-title">Stock Display</h2>
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal form-bordered">
+                        <div class="form-group" id="customerSel">
+                            <label class="col-md-3 control-label">Product Name</label>
+                            <div class="col-md-6">
+                                <select id="ddlProducts" class="form-control info" style="width:300px;">
+                                    <option value="0">Select Product</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Stock Count</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control"
+                                       id="txtStock"
+                                       disabled="disabled"
+                                       name="Stock">
+                                @*<input type="text" data-plugin-datepicker class="form-control">*@
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Custom-Script/Stock.js"></script>
+}

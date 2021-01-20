@@ -1,0 +1,446 @@
+﻿
+@{
+    ViewData["Title"] = "PoCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container containerpurEntry" id="app-container">
+    @* purchase order form *@
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel">
+
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+
+                    <h2 class="panel-title">Purchase Order Form</h2>
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal form-bordered">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Doctor Name</label>
+                            <div class="col-md-6">
+                                @*<select class="form-control info seleteddrop" id="ddlDoctors" v-model="purchaseVm.doctorId" v-select="ddlDoctors">
+                                        <option v-for="doctor in doctors" v-bind:value="doctor.id">
+                                            {{doctor.name}}
+                                        </option>
+                                    </select>*@
+                                <select id="ddlDoctors" class="form-control info" style="width:300px;">
+                                    <option value="0">Select Doctor</option>
+                                    <!-- Dropdown List Option -->
+                                </select>
+                                @*<select2 :options="doctoroptions" v-model="purchaseVm.doctorId">
+                                        <option disabled value="0">Select one</option>
+                                    </select2>*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Vendor Name</label>
+                            <div class="col-md-6">
+                                <select id="ddlVendors" class="form-control info" style="width:300px;">
+                                    <option value="0">Select Vendor</option>
+                                </select>
+
+                                @*<select class="form-control info seleteddrop"
+                                            id="ddlVendors"
+                                            v-model="purchaseVm.vendorId">
+                                        <option v-for="vendor in vendors" v-bind:value="vendor.id">
+                                            {{vendor.name}}
+                                        </option>
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Purchase Date</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control"
+                                       id="txtOrderDate"
+                                       autocomplete="off"
+                                       v-model="purchaseVm.OrderDate"
+                                       name="OrderDate">
+                                @*<input type="text" data-plugin-datepicker class="form-control">*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Naration</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtNaration"
+                                       name="Naration"
+                                       v-model="purchaseVm.Naration"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Invoice No</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtInvoiceNo"
+                                       name="InvoiceNo"
+                                       v-model="purchaseVm.InvoiceNo"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total CGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalCgst"
+                                       v-model="purchaseVm.TotalCGSTAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total SGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalAmount"
+                                       v-model="purchaseVm.TotalSGSTAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total IGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalAmount"
+                                       v-model="purchaseVm.TotalIGSTAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalAmount"
+                                       v-model="purchaseVm.TotalAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <label class="col-md-3 control-label">With Preselected Options</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" multiple="multiple" data-plugin-multiselect id="ms_example2">
+                                        <option value="cheese" selected>Cheese</option>
+                                        <option value="tomatoes" selected>Tomatoes</option>
+                                        <option value="mozarella" selected>Mozzarella</option>
+                                        <option value="mushrooms">Mushrooms</option>
+                                        <option value="pepperoni">Pepperoni</option>
+                                        <option value="onions">Onions</option>
+                                    </select>
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <div class="col col-md-3">
+
+                            </div>
+                            <div class="col col-md-6">
+                                <button type="button" class="btn btn-primary" v-on:click="onSubmit">Save</button>
+                                <button class="btn btn-default">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    @* Purchase Item table for purchase order *@
+
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel">
+
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+                    <button id="addToTable" class="btn btn-primary" data-toggle="modal" v-on:click="OpenModal">Add <i class="fa fa-plus"></i></button>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped mb-none">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Base Value</th>
+                                <th>CGST</th>
+                                <th>SGST</th>
+                                <th class="hidden-phone">IGST</th>
+                                <th class="hidden-phone">Qty</th>
+                                <th class="hidden-phone">Amount</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="gradeX" v-for="item in purchaseOrderItems" :key="item.id">
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.TaxValue}}</td>
+                                <td>{{item.Cgst}}</td>
+                                <td>{{item.Sgst}}</td>
+                                <td class="hidden-phone">{{item.Igst}}</td>
+                                <td class="hidden-phone">{{item.Qty}}</td>
+                                <td class="hidden-phone">{{item.Amount}}</td>
+                                <td><button type="button" class="btn btn-info" v-on:click="onOrderItemEdit(item)"><i class="fa fa-edit"></i></button></td>
+                                <td><button type="button" class="btn btn-danger" v-on:click="onOrderItemDelete(item)"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="poitemCreateModel" role="dialog" aria-labelledby="poitemCreateModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form-bordered" method="get">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Product Name</label>
+                            <div class="col-md-6">
+                                <select id="ddlProduct" class="form-control info" style="width:300px;">
+                                    <option value="0">Select Product</option>
+                                </select>
+                                @*<select class="form-control info" id="ddlProduct" v-model="purchaseOrderItem.ProductId" v-on:change="onChange($event)">
+                                        <option value="0" selected="selected">Select Product</option>
+                                        <option v-for="purch in products" v-bind:value="purch.id">
+                                            {{purch.productName}}
+                                        </option>
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Package Name</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control"
+                                       id="txtPackage"
+                                       name="Package"
+                                       v-model="purchaseOrderItem.Package"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">MRP</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtMRP"
+                                       name="Mrp"
+                                       disabled=""
+                                       v-model="purchaseOrderItem.Mrp"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Rate</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtRate"
+                                       name="Rate"
+                                       disabled=""
+                                       v-model="purchaseOrderItem.Rate"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Discount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtDiscount"
+                                       name="Discount"
+                                       v-model="purchaseOrderItem.Discount"
+                                       disabled=""
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">HSN</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtHsn"
+                                       name="Hsn"
+                                       v-model="purchaseOrderItem.Hsn"
+                                       disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Batch No</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtBatchNo"
+                                       name="BatchNo"
+                                       v-model="purchaseOrderItem.Batch"
+                                       disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Qty</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtQty"
+                                       name="Qty"
+                                       v-model="purchaseOrderItem.Qty"
+                                       v-on:change="calculateAmount($event)"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Before Tax Value</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTaxValue"
+                                       name="TaxValue"
+                                       v-model="purchaseOrderItem.TaxValue"
+                                       disabled=""
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <input type="checkbox" class="form-check-input" id="isOutSider">
+                                <label class="form-check-label" for="isOutSider">Inter-State Transaction</label>
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">CGST Percentage</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtcgstPercentage"
+                                       name="cgstPercentage"
+                                       v-model="purchaseOrderItem.CgstPercentage"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">CGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtcgst"
+                                       name="cgst"
+                                       autocomplete="off"
+                                       v-model="purchaseOrderItem.Cgst"
+                                       disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">SGST Percentage</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtsgstPercentage"
+                                       v-model="purchaseOrderItem.SgstPercentage"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">SGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtsgst"
+                                       name="sgst"
+                                       autocomplete="off"
+                                       v-model="purchaseOrderItem.Sgst"
+                                       disabled="">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group igstper">
+                            <label class="col-md-3 control-label">IGST Percentage</label>
+                            <div class="col-md-6">
+                                <input type="number"
+                                       class="form-control "
+                                       id="txtIgstPercentage"
+                                       name="IgstPercentage"
+                                       v-model="purchaseOrderItem.IgstPercentage"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group igstper">
+                            <label class="col-md-3 control-label">IGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtIgst"
+                                       name="Igst"
+                                       autocomplete="off"
+                                       v-model="purchaseOrderItem.Igst"
+                                       disabled="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtAmount"
+                                       name="Amount"
+                                       autocomplete="off"
+                                       v-model="purchaseOrderItem.Amount"
+                                       disabled="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnOrderItempopupClose">Close</button>
+                    <button type="button" class="btn btn-info" v-if="updatePurchaseOrderItem" v-on:click="onUpdateData">Update</button>
+                    <button type="button" class="btn btn-primary" v-else v-on:click="onOrderItemSaved">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/Custom-Script/purchaseEntry.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".containerpurEntry").LoadingOverlay("show");
+            //On Javascript Changes
+           
+        })
+      
+    </script>
+
+}

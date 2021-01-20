@@ -1,0 +1,97 @@
+﻿@model IEnumerable<CoreModel.Model.InvoiceBill>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sales Bill</h2>
+
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class="fa fa-caret-down"></a>
+            <a href="#" class="fa fa-times"></a>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-2">
+                <button id="addToBilling" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+            </div>
+            <div class="col-md-6">
+                <h2>Sales Billing</h2>
+            </div>
+        </div>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvoiceDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvoiceNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalCgst)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalSgst)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalIgst)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalAmount)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCgst)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalSgst)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalIgst)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAmount)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "Billing",new { Id=item.Id })" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            @*<button type="button" id="poView" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
+                            <a href="@Url.Action("Edit", "Billing",new { Id=item.Id })" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                            @*<button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>*@
+                            <a href="@Url.Action("Delete", "Billing",new { Id=item.Id })" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#addToBilling').click(function () {
+                location.replace("/Billing/Create");
+            });
+        });
+    </script>
+}

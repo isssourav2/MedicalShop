@@ -1,0 +1,423 @@
+﻿@model ERPMEDICAL.ViewModel.BillingViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Billing Edit</h2>
+
+<div class="container containerpurEntry" id="app-container">
+    @* Billing form *@
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel">
+
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+
+                    <h2 class="panel-title">Purchase Order Form</h2>
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal form-bordered">
+                        <div class="form-group" id="customerSel">
+                            <label class="col-md-3 control-label">Customer Name</label>
+                            <div class="col-md-6">
+                                <select id="ddlCustomers" class="form-control info" style="width:300px;">
+                                    <option value="0">Select Customer</option>
+                                </select>
+
+                                @*<select class="form-control info seleteddrop"
+                                            id="ddlVendors"
+                                            v-model="salesVm.vendorId">
+                                        <option v-for="vendor in vendors" v-bind:value="vendor.id">
+                                            {{vendor.name}}
+                                        </option>
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Invoice Date</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control"
+                                       id="txtInvoiceDate"
+                                       autocomplete="off"
+                                       v-model="salesVm.InvoiceDate"
+                                       name="OrderDate">
+                                @*<input type="text" data-plugin-datepicker class="form-control">*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Invoice No</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtInvoiceNo"
+                                       name="InvoiceNo"
+                                       v-model="salesVm.InvoiceNo"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><input type="checkbox" id="chkOther" value="other" onclick="myFunction()"> Other</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtOtherCustomer"
+                                       name="OtherCustomer"
+                                       v-model="salesVm.OtherCustomer"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total CGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalCgst"
+                                       v-model="salesVm.TotalCGSTAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total SGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalAmount"
+                                       v-model="salesVm.TotalSGSTAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total IGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalAmount"
+                                       v-model="salesVm.TotalIGSTAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalAmount"
+                                       v-model="salesVm.TotalAmount"
+                                       disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col col-md-3">
+
+                            </div>
+                            <div class="col col-md-6">
+                                <button type="button" class="btn btn-primary" v-on:click="onSubmit">Save</button>
+                                <button class="btn btn-default">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    @* Sales Item table for Sales order *@
+
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel">
+
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+                    <button id="addToTable" class="btn btn-primary" data-toggle="modal" v-on:click="OpenModal">Add <i class="fa fa-plus"></i></button>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped mb-none">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Base Value</th>
+                                <th>CGST</th>
+                                <th>SGST</th>
+                                <th class="hidden-phone">IGST</th>
+                                <th class="hidden-phone">Qty</th>
+                                <th class="hidden-phone">Amount</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="gradeX" v-for="item in BillingItems" :key="item.id">
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.BaseValue}}</td>
+                                <td>{{item.Cgst}}</td>
+                                <td>{{item.Sgst}}</td>
+                                <td class="hidden-phone">{{item.Igst}}</td>
+                                <td class="hidden-phone">{{item.Qty}}</td>
+                                <td class="hidden-phone">{{item.Amount}}</td>
+                                <td><button type="button" class="btn btn-info" v-on:click="onOrderItemEdit(item)"><i class="fa fa-edit"></i></button></td>
+                                <td><button type="button" class="btn btn-danger" v-on:click="onOrderItemDelete(item)"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="SalesCreateModel" role="dialog" aria-labelledby="SalesCreateModel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form-bordered" method="get">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Product Name</label>
+                            <div class="col-md-6">
+                                <select id="ddlProduct" class="form-control info" style="width:300px;">
+                                    <option value="0">Select Product</option>
+                                </select>
+                                @*<select class="form-control info" id="ddlProduct" v-model="BillingItem.ProductId" v-on:change="onChange($event)">
+                    <option value="0" selected="selected">Select Product</option>
+                    <option v-for="purch in products" v-bind:value="purch.id">
+                        {{purch.productName}}
+                    </option>
+                </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Package Name</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control"
+                                       id="txtPackage"
+                                       name="Package"
+                                       v-model="BillingItem.Package"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Rate</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtRate"
+                                       name="Rate"
+                                       v-model="BillingItem.Rate"
+                                     
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Discount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtDiscount"
+                                       name="Discount"
+                                       v-model="BillingItem.Discount"
+                                     
+                                       autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Qty</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtQty"
+                                       name="Qty"
+                                       v-model="BillingItem.Qty"
+                                       v-on:change="calculateAmount($event)"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Base Value</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtBaseValue"
+                                       name="BaseValue"
+                                       v-model="BillingItem.BaseValue"
+                                     
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <input type="checkbox" class="form-check-input" id="isOutSider">
+                                <label class="form-check-label" for="isOutSider">Inter-State Transaction</label>
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">CGST Percentage</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtcgstPercentage"
+                                       name="cgstPercentage"
+                                       v-model="BillingItem.CgstPercentage"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">CGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtcgst"
+                                       name="cgst"
+                                       autocomplete="off"
+                                       v-model="BillingItem.Cgst"
+                                     >
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">SGST Percentage</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtsgstPercentage"
+                                       v-model="BillingItem.SgstPercentage"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group localtax">
+                            <label class="col-md-3 control-label">SGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtsgst"
+                                       name="sgst"
+                                       autocomplete="off"
+                                       v-model="BillingItem.Sgst"
+                                     >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group igstper">
+                            <label class="col-md-3 control-label">IGST Percentage</label>
+                            <div class="col-md-6">
+                                <input type="number"
+                                       class="form-control "
+                                       id="txtIgstPercentage"
+                                       name="IgstPercentage"
+                                       v-model="BillingItem.IgstPercentage"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group igstper">
+                            <label class="col-md-3 control-label">IGST Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtIgst"
+                                       name="Igst"
+                                       autocomplete="off"
+                                       v-model="BillingItem.Igst"
+                                     >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Amount</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtAmount"
+                                       name="Amount"
+                                       autocomplete="off"
+                                       v-model="BillingItem.Amount"
+                                     >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnOrderItempopupClose">Close</button>
+                    <button type="button" class="btn btn-info" v-if="updateBillingItem" v-on:click="onUpdateData">Update</button>
+                    <button type="button" class="btn btn-primary" v-else v-on:click="onOrderItemSaved">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        var myArray = [];
+        debugger;
+
+        var Id = parseInt(@Model.InvoiceBill.Id);
+        var customerId = parseInt(@Model.InvoiceBill.CustomerId);
+        var customerName = '@Model.CustomerName';
+        var InvoiceDate = '@Model.InvoiceBill.InvoiceDate'
+        var InvoiceNo = '@Model.InvoiceBill.InvoiceNo';
+        var otherCustomer='@Model.InvoiceBill.OtherCustomer'
+        var TCgstAmount = parseFloat(@Model.InvoiceBill.TotalCgst);
+        var TSgstAmount = parseFloat(@Model.InvoiceBill.TotalSgst);
+        var TIgstAmount = parseFloat(@Model.InvoiceBill.TotalIgst);
+        var TAmount = parseFloat(@Model.InvoiceBill.TotalAmount);
+
+        //Order Item Create
+        myArray=@Json.Serialize(Model.InvoiceBillDetails);
+
+    </script>
+    <script src="~/Custom-Script/BillingEdit.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".containerpurEntry").LoadingOverlay("show");
+            //On Javascript Changes
+        })
+    </script>
+    <script>
+        function myFunction() {
+            // Get the checkbox
+            var checkBox = document.getElementById("chkOther");
+            // Get the output text
+            var text = document.getElementById("txtOtherCustomer");
+            var dropdowndiv = document.getElementById("customerSel");
+            // If the checkbox is checked, display the output text
+            if (checkBox.checked == true) {
+                text.style.display = "block";
+                dropdowndiv.style.display = "none";
+            } else {
+                text.style.display = "none";
+                dropdowndiv.style.display = "block";
+            }
+        }
+    </script>
+}

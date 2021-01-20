@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- start: page -->
+<section class="panel">
+    <header class="panel-heading">
+        <!--<div class="panel-actions">
+            <a href="#" class="fa fa-caret-down"></a>
+            <a href="#" class="fa fa-times"></a>
+        </div>-->
+        <h2 class="panel-title">COMPANY BRANCHES</h2>
+    </header>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-md">
+                    <button id="addToTable" class="btn btn-primary" onclick="window.location.href='@Url.Action("ManageCompany", "Company")'">ADD COMPANY-BRANCH <i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>State Code</th>
+                    <th>City</th>
+                    <th>GST No.</th>
+                    <th>DL No.</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.comBranchList)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Address</td>
+                        <td>@item.State</td>
+                        <td>@item.StateCode</td>
+                        <td>@item.City</td>
+                        <td>@item.Gstno</td>
+                        <td>@item.Dlno</td>
+                        <td>
+                            <center>
+                                @*<button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
+                                <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("ManageCompany", "Company", new { Param=item.Id})'"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger" onclick="DeleteComBranchByID(@item.Id)"><i class="fa fa-trash-o"></i></button>
+                            </center>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- end: page -->
+<script src="~/Custom-Script/manage-company-script.js"></script>
+

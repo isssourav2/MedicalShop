@@ -1,0 +1,246 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h5 class="text-semibold text-dark text-uppercase mb-md mt-lg">Transaction Summary</h5>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <section class="panel panel-featured-left panel-featured-primary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-primary">
+                            <i class="fa fa-life-ring"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary">
+                            <h4 class="title">Bill transaction</h4>
+                            <div class="info">
+                                <strong class="amount">12325581</strong>
+                                @*<span class="text-primary">(14 unread)</span>*@
+                            </div>
+                        </div>
+                        <div class="summary-footer">
+                            <a class="text-muted text-uppercase">(view all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <section class="panel panel-featured-top panel-featured-primary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-primary">
+                            <i class="fa fa-life-ring"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary">
+                            <h4 class="title">Pending Tranaction</h4>
+                            <div class="info">
+                                <strong class="amount">1123281</strong>
+                                <span class="text-primary">(14 unread)</span>
+                            </div>
+                        </div>
+                        <div class="summary-footer">
+                            <a class="text-muted text-uppercase">(view all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <section class="panel panel-featured-right panel-featured-primary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-primary">
+                            <i class="fa fa-life-ring"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary">
+                            <h4 class="title">Purchase</h4>
+                            <div class="info">
+                                <strong class="amount">1281</strong>
+                                <span class="text-primary">(14 unread)</span>
+                            </div>
+                        </div>
+                        <div class="summary-footer">
+                            <a class="text-muted text-uppercase">(view all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <section class="panel panel-featured-bottom panel-featured-primary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-primary">
+                            <i class="fa fa-life-ring"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary">
+                            <h4 class="title">Sales</h4>
+                            <div class="info">
+                                <strong class="amount">1281</strong>
+                                <span class="text-primary">(14 unread)</span>
+                            </div>
+                        </div>
+                        <div class="summary-footer">
+                            <a class="text-muted text-uppercase">(view all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>ERP tracking</h2>
+        <p class="mb-lg">we are implement pie charts for trancking transaction between purchase and sales.</p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="fa fa-caret-down"></a>
+                            <a href="#" class="fa fa-times"></a>
+                        </div>
+
+                        <h2 class="panel-title">Status Chart</h2>
+                        <p class="panel-subtitle">Lightweight jQuery plugin to render and animate nice pie charts with the HTML5 canvas element.</p>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="circular-bar">
+                                    <div class="circular-bar-chart" data-percent="85" data-plugin-options='{ "barColor": "#0088CC", "delay": 300 }'>
+                                        <strong>Purchase</strong>
+                                        <label><span class="percent">85</span>%</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="circular-bar">
+                                    <div class="circular-bar-chart" data-percent="60" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 600 }'>
+                                        <strong>Sales</strong>
+                                        <label><span class="percent">60</span>%</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="circular-bar">
+                                    <div class="circular-bar-chart" data-percent="70" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 600 }'>
+                                        <strong>Stock In Hand</strong>
+                                        <label><span class="percent">70</span>%</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="circular-bar">
+                                    <div class="circular-bar-chart" data-percent="30" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 600 }'>
+                                        <strong>Transaction</strong>
+                                        <label><span class="percent">30</span>%</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                    <a href="#" class="fa fa-times"></a>
+                </div>
+
+                <h2 class="panel-title">Purchase Chart</h2>
+                <p class="panel-subtitle">You don't have to do much to get an attractive plot. Create a placeholder, make sure it has dimensions (so Flot knows at what size to draw the plot), then call the plot function with your data.</p>
+            </header>
+            <div class="panel-body">
+
+                <!-- Flot: Basic -->
+                <div class="chart chart-md" id="flotBasic"></div>
+                <script type="text/javascript">
+
+											var flotBasicData = [{
+												data: [
+													[0, 170],
+													[1, 169],
+													[2, 173],
+													[3, 188],
+													[4, 147],
+													[5, 113],
+													[6, 128],
+													[7, 169],
+													[8, 173],
+													[9, 128],
+													[10, 128]
+												],
+												label: "Item 1",
+												color: "#0088cc"
+											}, {
+												data: [
+													[0, 115],
+													[1, 124],
+													[2, 114],
+													[3, 121],
+													[4, 115],
+													[5, 83],
+													[6, 102],
+													[7, 148],
+													[8, 147],
+													[9, 103],
+													[10, 113]
+												],
+												label: "Item 2",
+												color: "#2baab1"
+											}, {
+												data: [
+													[0, 70],
+													[1, 69],
+													[2, 73],
+													[3, 88],
+													[4, 47],
+													[5, 13],
+													[6, 28],
+													[7, 69],
+													[8, 73],
+													[9, 28],
+													[10, 28]
+												],
+												label: "Item 3",
+												color: "#734ba9"
+											}];
+
+											// See: assets/javascripts/ui-elements/examples.charts.js for more settings.
+
+                </script>
+
+            </div>
+        </section>
+    </div>
+</div>

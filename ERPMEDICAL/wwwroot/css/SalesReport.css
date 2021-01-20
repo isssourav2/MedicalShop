@@ -1,0 +1,59 @@
+﻿.app-contaner{
+
+}
+.panel {
+    background-color: #0094ff;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px 10px 10px;
+    margin-bottom: 32px;
+}
+    .panel label{
+        color:white;
+    }
+    .advance-filter {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+#invoiceNo {
+    flex: 1;
+    margin-right: 5px;
+}
+#invoiceFromDate {
+    flex: 1;
+    margin-right: 5px;
+}
+#invoiceToDate {
+    flex: 1;
+    margin-right: 5px;
+}
+.reportLowerTable table td {
+    background-color: #0094ff;
+    color: white;
+}
+/*#example {
+    margin-top: 20px;
+}
+.display{
+    border: 2px solid #0094ff;
+    padding: 10px 10px 0 10px;
+    
+}
+    .display > thead {
+        padding: 10px 10px 0 10px;
+        background-color:white;
+        color:#000000;
+       border-bottom:2px solid #22aa23;
+    }*/
+/*.monthcal {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    box-sizing: border-box;
+    margin-left: -36px;
+    margin-bottom: -34px;
+}
+.month-item {
+    margin-right: 5px;
+}*/

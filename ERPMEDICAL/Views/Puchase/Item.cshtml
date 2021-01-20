@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewData["Title"] = "Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start: page -->
+<section class="panel" id="medical-product-management">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            <a href="#" class="fa fa-caret-down"></a>
+            <a href="#" class="fa fa-times"></a>
+        </div>
+        <h2 class="panel-title">Rows with Details</h2>
+    </header>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-md">
+                    <button id="addToTable" class="btn btn-primary" data-toggle="modal" data-target="#itemModal">Add <i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped mb-none" id="datatable-editable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>HSN Code</th>
+                    <th>Package</th>
+                    <th>MRP</th>
+                    <th>Rate</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--v-for="(item, index) in vendors"-->
+                <tr class="gradeX" v-for="item in productList" :key="item.id">
+                    <td>{{item.productName}}</td>
+                    <td>{{item.hsnCode}}</td>
+                    <td>{{item.package}}</td>
+                    <td>{{item.mrp}}</td>
+                    <td>{{item.rate}}</td>
+                    <td><a href="#" class="on-default edit-row" v-on:click="populateProductDetail(item)"><i class="fa fa-pencil"></i></a></td>
+                    <td><a href="#" class="on-default remove-row" v-on:click="DeleteProduct(item.id)"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- START: MODAL-POPUP -->
+    <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Product Detail</h5>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <section class="panel">
+                                @*<header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="fa fa-caret-down"></a>
+                                            <a href="#" class="fa fa-times"></a>
+                                        </div>
+
+                                        <h2 class="panel-title">Vendor Entry</h2>
+                                    </header>*@
+                                <div class="panel-body">
+                                    <form class="form-horizontal form-bordered" method="get">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtProductName">Product Name</label>
+                                            <div class="col-md-6">
+                                                <input type="hidden" id="hdnProductID" name="hdnProductID" />
+                                                <input type="hidden" id="hdnProductBaseID" name="hdnProductBaseID" />
+                                                <input type="text" class="form-control" id="txtProductName" name="txtProductName" placeholder="Enter product name" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtHsnCode">Hsn Code</label>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="txtHsnCode" name="txtHsnCode" placeholder="Enter product code" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtBatchNo">Batch No</label>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="txtBatchNo" name="txtBatchNo" placeholder="Enter Batch No" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtDescription">Description</label>
+                                            <div class="col-md-6">
+                                                <textarea class="form-control" rows="3" id="txtDescription" name="txtDescription" placeholder="Enter product description" data-plugin-textarea-autosize></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtProPackage">Product Package</label>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="txtProPackage" name="txtProPackage" placeholder="Enter product package" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtUnit">Unit</label>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="txtUnit" name="txtUnit" placeholder="Enter unit" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtMRP">MRP</label>
+                                            <div class="col-md-6">
+                                                <input type="number" class="form-control" id="txtMRP" name="txtMRP" placeholder="Enter MRP" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtRate">Rate</label>
+                                            <div class="col-md-6">
+                                                <input type="number" class="form-control" id="txtRate" name="txtRate" placeholder="Enter rate" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtDiscount">Discount</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group mb-md">
+                                                    <input type="number" class="form-control" id="txtDiscount" name="txtDiscount" placeholder="Enter discount" autocomplete="off">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-info" type="button">%</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtCgstPer">CGST Per</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group mb-md">
+
+                                                    <input type="number" class="form-control" id="txtCgstPer" name="txtCgstPer" placeholder="CGST Percentage">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-info" type="button">%</button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtSgstPer">SGST Per</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group mb-md">
+
+                                                    <input type="number" class="form-control" id="txtSgstPer" name="txtSgstPer" placeholder="SGST amount">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-info" type="button">%</button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="txtIgstPer">IGST Per</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group mb-md">
+
+                                                    <input type="number" class="form-control" id="txtIgstPer" name="txtIgstPer" placeholder="IGST amount">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-info" type="button">%</button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+            <label class="col-md-3 control-label" for="txtIgstPer">IGST Per</label>
+            <div class="col-md-6">
+                <div class="input-group mb-md">
+
+                    <input type="number" class="form-control" id="txtIgstPer" name="txtIgstPer" placeholder="Enter tax amount">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="button">%</button>
+                    </span>
+                </div>
+            </div>
+        </div>*@
+                                        @*<div class="form-group">
+            <label class="col-md-3 control-label">Item Group</label>
+            <div class="col-md-6">
+                <select data-plugin-selectTwo class="form-control populate">
+                    <option value="CA">California</option>
+                    <option value="NV">Nevada</option>
+                    <option value="OR">Oregon</option>
+                    <option value="WA">Washington</option>
+                </select>
+            </div>
+        </div>*@
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="ResetProductForm()">Close</button>
+                    <button type="button" class="btn btn-primary" v-on:click="AddEditProduct()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: MODAL-POPUP -->
+</section>
+<!-- end: page -->
+@section scripts {
+    <script src="~/Custom-Script/product-script.js"></script>
+}

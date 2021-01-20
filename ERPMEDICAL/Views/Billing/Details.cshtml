@@ -1,0 +1,110 @@
+﻿@model ERPMEDICAL.ViewModel.BillingViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Billing Details</h2>
+<div class="container">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="fa fa-caret-down"></a>
+                <a href="#" class="fa fa-times"></a>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Bill</h2>
+                </div>
+            </div>
+        </header>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Customer Name</th>
+                        <th>Invoice Date</th>
+                        <th>Total CGST Amount</th>
+                        <th class="hidden-phone">Total SGST Amount</th>
+                        <th class="hidden-phone">Total IGST Amount</th>
+                        <th class="hidden-phone">TotalAmount</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            @Model.InvoiceBill.InvoiceNo
+                        </td>
+                        <td>
+                            @Model.CustomerName
+                        </td>
+                        <td>
+                            @Model.InvoiceBill.InvoiceDate
+                        </td>
+                        <td>
+                            @Model.InvoiceBill.TotalCgst
+                        </td>
+                        <td>
+                            @Model.InvoiceBill.TotalSgst
+                        </td>
+                        <td>
+                            @Model.InvoiceBill.TotalIgst
+                        </td>
+                        <td>
+                            @Model.InvoiceBill.TotalAmount
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="fa fa-caret-down"></a>
+                <a href="#" class="fa fa-times"></a>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h2>All Transaction</h2>
+                </div>
+            </div>
+        </header>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped mb-none">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Base Value</th>
+                        <th>CGST</th>
+                        <th>SGST</th>
+                        <th>IGST</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var po in Model.InvoiceBillDetails)
+                    {
+                        <tr>
+                            <td>@po.ProductName</td>
+                            <td>@po.BaseValue</td>
+                            <td>@po.Cgst</td>
+                            <td>@po.Sgst</td>
+                            <td>@po.Igst</td>
+                            <td>@po.Amount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<div>
+    <a href="@Url.Action("BillPreview", "Billing",new { Id=Model.InvoiceBill.Id })" class="btn btn-primary"><i class="fa fa-eye"></i></a> |
+    <a asp-action="Index">Back to List</a>
+</div>

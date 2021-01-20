@@ -1,0 +1,60 @@
+﻿@model CoreModel.Model.DoctorDetails
+@{
+    ViewData["Title"] = "ManageDoctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="doctor-management">
+    <div class="col-md-12">
+        <div data-collapsed="0" class="panel">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="panel-actions">
+                    </div>
+                    <h2 class="panel-title">ADD / EDIT DOCTOR DETAILS</h2>
+                </div>
+            </div>
+
+            <form>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>Doctor's Name <span style="color:red">*</span></label>
+                            <input type="hidden" id="hdnDoctorID" name="hdnDoctorID" value="@Model.Id" />
+                            <input type="hidden" id="hdnDoctorBaseID" name="hdnDoctorBaseID" value="@Model.Baseid" />
+                            <input type="text" class="form-control" id="txtDoctorName" name="txtDoctorName" value="@Model.Name" placeholder="Enter product name" autocomplete="off">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Mobile No.</label>
+                            <input type="text" class="form-control" id="txtMobileNo" name="txtMobileNo" value="@Model.MobileNo" placeholder="Enter product code" autocomplete="off">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Doctor's Age.</label>
+                            <input type="text" class="form-control" id="txtAge" name="txtAge" value="@Model.Age" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Email Address</label>
+                            <input type="text" class="form-control" id="txtEmailID" name="txtEmailID" value="@Model.EmailId" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Address</label><span></span>
+                            <input type="text" class="form-control" id="txtAddress" name="txtAddress" value="@Model.Address" placeholder="Enter product package" autocomplete="off">
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Doctor")'">Cancel</button>
+                            <button id="btnSubmitProduct" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="AddEditDoctor()">Submit</button>
+                            @*&nbsp;&nbsp;&nbsp;*@
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end: page -->
+<script src="~/Custom-Script/doctor-management-script.js"></script>

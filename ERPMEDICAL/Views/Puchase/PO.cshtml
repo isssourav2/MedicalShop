@@ -1,0 +1,115 @@
+﻿@model IEnumerable<ERPMEDICAL.ViewModel.PoViewModel>
+@{
+    ViewData["Title"] = "PO";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //decimal TotalCgstAmount = 0;
+    //decimal TotalSgstAmount = 0;
+    //decimal TotalIgstAmount = 0;
+    //decimal TotalTransactionAmount = 0;
+}
+
+<!-- start: page -->
+<div class="container" id="app-container">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="fa fa-caret-down"></a>
+                <a href="#" class="fa fa-times"></a>
+            </div>
+            <div class="row">
+                <div class="col-md-4 offset-2">
+                    <button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+                </div>
+                <div class="col-md-6">
+                    <h2>Purchase Order Form</h2>
+                </div>
+            </div>
+        </header>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Vendor Name</th>
+                        <th>Purchase Date</th>
+                        <th>Total CGST Amount</th>
+                        <th class="hidden-phone">Total SGST Amount</th>
+                        <th class="hidden-phone">Total IGST Amount</th>
+                        <th class="hidden-phone">TotalAmount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var po in Model)
+                    {
+                        <tr>
+                            <td>
+                                @po.InvoiceNo
+                            </td>
+                            <td>
+                                @po.VendorName
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(po.OrderDate).ToShortDateString()
+                            </td>
+                            <td>
+                                @po.TotalCgst
+                            </td>
+                            <td>
+                                @po.TotalSgst
+                            </td>
+                            <td>
+                                @po.TotalIgst
+                            </td>
+                            <td>
+                                @po.TotalAmount
+                            </td>
+                            <td>
+                                <a href="@Url.Action("PoView", "Puchase",new { Id=po.Id })" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                @*<button type="button" id="poView" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
+                                <a href="@Url.Action("PoEdit", "Puchase",new { Id=po.Id })" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                @*<button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>*@
+                                <a href="@Url.Action("Delete", "Puchase",new { Id=po.Id })" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                @*<button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>*@
+                            </td>
+                        </tr>
+                    }
+                    @*<tr v-for="item in purchaseOrderDisplayVm" :key="item.id">
+                            <td>{{item.doctorName}}</td>
+                            <td>{{item.vendorName}}</td>
+                            <td>{{item.orderDate}}</td>
+                            <td class="center hidden-phone">{{item.reserveCharge}}</td>
+                            <td class="center hidden-phone">{{item.totalAmount}}</td>
+                            <td class="center hidden-phone">{{item.transportCharge}}</td>
+                            <td>
+                                <button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>*@
+                </tbody>
+              
+            </table>
+        </div>
+    </section>
+</div>
+
+
+
+@section scripts {
+    @*<script src="~/Custom-Script/purchaseEntry.js"></script>*@
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#app-container").LoadingOverlay("show");
+            setTimeout(function () {
+                $("#app-container").LoadingOverlay("hide");
+            }, 2000);
+            $('#addToTable').click(function () {
+                location.replace("/Puchase/PoCreate");
+            });
+           
+            // $('#datatable-default').DataTable();
+        });
+    </script>
+}

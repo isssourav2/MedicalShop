@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start: page -->
+<section class="panel" id="medical-product-management">
+    <header class="panel-heading">
+        <!--<div class="panel-actions">
+            <a href="#" class="fa fa-caret-down"></a>
+            <a href="#" class="fa fa-times"></a>
+        </div>-->
+        <h2 class="panel-title">ALL PRODUCTS</h2>
+    </header>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-md">
+                    <button id="addToTable" class="btn btn-primary" onclick="window.location.href='@Url.Action("ManageProduct", "Product")'">ADD PRODUCT <i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>HSN Code</th>
+                    <th>Package</th>
+                    <th>MRP</th>
+                    <th>Rate</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.productList)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.HsnCode</td>
+                        <td>@item.Package</td>
+                        <td>@item.Mrp</td>
+                        <td>@item.Rate</td>
+                        <td>
+                            <center>
+                                @*<button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
+                                <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("ManageProduct", "Product", new { ProductID=item.Id})'"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger" onclick="DeleteProductByID(@item.Id)"><i class="fa fa-trash-o"></i></button>
+                            </center>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- end: page -->
+<script src="~/Custom-Script/product-delete-script.js"></script>

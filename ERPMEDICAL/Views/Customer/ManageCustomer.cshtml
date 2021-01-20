@@ -1,0 +1,95 @@
+﻿@model CoreModel.Model.Customer
+@{
+    ViewData["Title"] = "ManageCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="medical-customer-management">
+    <div class="col-md-12">
+        <div data-collapsed="0" class="panel">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="panel-actions">
+                    </div>
+                    <h2 class="panel-title">ADD / EDIT CUSTOMER</h2>
+                </div>
+            </div>
+
+            <form>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Doctor's Name <span style="color:red">*</span></label>
+                            <input type="hidden" id="hdnProductID" name="hdnCustmerID" value="@Model.Id" />
+                            <input type="hidden" id="hdnCustomerBaseID" name="hdnCustomerBaseID" value="@Model.Baseid" />
+                            <input type="text" class="form-control" id="txtCustomerName" name="txtCustomerName" value="@Model.Name" placeholder="Enter product name" autocomplete="off">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Mobile No.</label>
+                            <input type="text" class="form-control" id="txtMobileNo" name="txtMobileNo" value="@Model.MobileNo" placeholder="Enter product code" autocomplete="off">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Email Address</label>
+                            <input type="text" class="form-control" id="txtEmailID" name="txtEmailID" value="@Model.EmailId" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>Driving Lincense No.</label>
+                            <input type="text" class="form-control" id="txtDlNo" name="txtDlNo" value="@Model.DlNo" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Address</label><span></span>
+                            <input type="text" class="form-control" id="txtAddress" name="txtAddress" value="@Model.Address" placeholder="Enter product package" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>Vehicle No.</label>
+                            <input type="text" class="form-control" id="txtVehicelNo" name="txtVehicelNo" value="@Model.VehicelNo" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>Station</label>
+                            <input type="text" class="form-control" id="txtStation" name="txtStation" value="@Model.Station" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Medical Center</label>
+                            <input type="text" class="form-control" id="txtMedicalNo" name="txtMedicalNo" value="@Model.MedicalCenter" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Shipping Address</label>
+                            <input type="text" class="form-control" id="txtShippingAddress" name="txtShippingAddress" value="@Model.ShippedAdress" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label>State</label>
+                            <input type="text" class="form-control" id="txtState" name="txtState" value="@Model.State" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label>State Code</label>
+                            <input type="text" class="form-control" id="txtStateCode" name="txtStateCode" value="@Model.StateCode" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label>GSTN No.</label>
+                            <input type="text" class="form-control" id="txtGSTNo" name="txtGSTNo" value="@Model.GstnCn" placeholder="Enter Batch No" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Customer")'">Cancel</button>
+                            <button id="btnSubmitProduct" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="AddEditCustomer()">Submit</button>
+                            @*&nbsp;&nbsp;&nbsp;*@
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end: page -->
+<script src="~/Custom-Script/customer-script.js"></script>

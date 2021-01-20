@@ -1,0 +1,70 @@
+﻿@model CoreModel.Model.CompanyBranch
+
+@{
+    ViewData["Title"] = "ManageCompany";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="company-branch-management">
+    <div class="col-md-12">
+        <div data-collapsed="0" class="panel">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="panel-actions">
+                    </div>
+                    <h2 class="panel-title">ADD / EDIT COMPANY BRANCH</h2>
+                </div>
+            </div>
+
+            <form>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>Company Name <span style="color:red">*</span></label>
+                            <input type="hidden" id="hdnCompanyID" name="hdnCompanyID" value="@Model.Id" />
+                            <input type="hidden" id="hdnCompanyBaseID" name="hdnCompanyBaseID" value="@Model.Baseid" />
+                            <input type="text" class="form-control" id="txtCompanyName" name="txtCompanyName" value="@Model.Name" placeholder="Enter company name" autocomplete="off">
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <label>Full Address</label>
+                            <input type="text" class="form-control" id="txtAddress" name="txtAddress" value="@Model.Address" placeholder="Enter full address ...." autocomplete="off">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>State Name</label>
+                            <input type="text" class="form-control" id="txtStateName" name="txtStateName" value="@Model.State" placeholder="Enter state name" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label>State Code</label>
+                            <input type="text" class="form-control" id="txtStateCode" name="txtStateCode" value="@Model.StateCode" placeholder="Enter state code" autocomplete="off">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>City Name</label><span></span>
+                            <input type="text" class="form-control" id="txtCity" name="txtCity" value="@Model.City" placeholder="Enter city name" autocomplete="off">
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label>GST No.</label><span></span>
+                            <input type="text" class="form-control" id="txtGSTNo" name="txtGSTNo" value="@Model.Gstno" placeholder="Enter GST no." autocomplete="off">
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label>DL No.</label><span></span>
+                            <input type="text" class="form-control" id="txtDLNo" name="txtDLNo" value="@Model.Dlno" placeholder="Enter driving License" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Company")'">Cancel</button>
+                            <button id="btnSubmitProduct" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="AddEditComBranch()">Submit</button>
+                            @*&nbsp;&nbsp;&nbsp;*@
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end: page -->
+<script src="~/Custom-Script/manage-company-script.js"></script>
+
