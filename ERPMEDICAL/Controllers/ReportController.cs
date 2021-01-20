@@ -45,6 +45,7 @@ namespace ERPMEDICAL.Controllers
                 return Redirect("/User/Login");
             }
         }
+
         public async Task<IActionResult> Get()
         {
             var path = Path.Combine(
