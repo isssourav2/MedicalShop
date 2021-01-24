@@ -683,6 +683,8 @@ namespace CoreModel.Model
                     .HasColumnName("totalAmount")
                     .HasColumnType("decimal(8,2)");
 
+                entity.Property(e => e.TotalBaseValue).HasColumnType("decimal(8,2)");
+
                 entity.Property(e => e.TransportCharge)
                     .HasColumnName("transportCharge")
                     .HasColumnType("decimal(8,2)");

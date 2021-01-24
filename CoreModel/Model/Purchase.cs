@@ -17,5 +17,6 @@ namespace CoreModel.Model
         public decimal? TotalAmount { get; set; }
         public int DoctorId { get; set; }
         public string Naration { get; set; }
+        public decimal? TotalBaseValue { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace ERPMEDICAL.ViewModel
         public string OrderDate { get; set; }
         public string Naration { get; set; }
         public string InvoiceNo { get; set; }
+        public string TotalBaseValue { get; set; }
         public string TotalCgst { get; set; }
         public string TotalSgst { get; set; }
         public string TotalIgst { get; set; }

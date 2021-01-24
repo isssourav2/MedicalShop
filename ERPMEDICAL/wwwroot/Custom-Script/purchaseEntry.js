@@ -89,6 +89,7 @@ $(document).ready(function () {
                 OrderDate: "",
                 InvoiceNo: "",
                 Naration: "",
+                TotalBaseValue:0,
                 TotalCGSTAmount: 0,
                 TotalSGSTAmount: 0,
                 TotalIGSTAmount: 0,
@@ -470,6 +471,7 @@ $(document).ready(function () {
                     OrderDate: vm.purchaseVm.OrderDate,
                     Naration: vm.purchaseVm.Naration,
                     InvoiceNo: vm.purchaseVm.InvoiceNo,
+                    TotalBaseValue: vm.purchaseVm.TotalBaseValue,
                     TotalCgst: vm.purchaseVm.TotalCGSTAmount,
                     TotalAmount: vm.purchaseVm.TotalAmount,
                     TotalSgst: vm.purchaseVm.TotalSGSTAmount,
@@ -626,11 +628,16 @@ $(document).ready(function () {
                     let cgstAmt = 0;
                     let sgstAmt = 0;
                     let igstAmt = 0;
+                    let totalBaseValue = 0;
+                    console.log("rate value", this.purchaseOrderItems);
+
                     this.purchaseOrderItems.map(x => {
                         cgstAmt = (parseFloat(cgstAmt) + parseFloat(x.Cgst)).toFixed(2);
                         sgstAmt = (parseFloat(sgstAmt) + parseFloat(x.Sgst)).toFixed(2);
                         igstAmt = (parseFloat(igstAmt) + parseFloat(x.Igst)).toFixed(2);
+                        totalBaseValue = (parseFloat(totalBaseValue) + parseFloat(x.Rate)).toFixed(2);
                     });
+                    this.purchaseVm.TotalBaseValue = parseFloat(totalBaseValue).toFixed(2);
                     this.purchaseVm.TotalCGSTAmount = parseFloat(cgstAmt).toFixed(2);
                     this.purchaseVm.TotalSGSTAmount = parseFloat(sgstAmt).toFixed(2);
                     this.purchaseVm.TotalIGSTAmount = parseFloat(igstAmt).toFixed(2);
