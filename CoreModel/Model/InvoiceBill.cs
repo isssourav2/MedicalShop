@@ -17,5 +17,6 @@ namespace CoreModel.Model
         public string OtherCustomer { get; set; }
         public int UserId { get; set; }
         public int CompanyBranchId { get; set; }
+        public decimal? TotalBaseValue { get; set; }
     }
 }

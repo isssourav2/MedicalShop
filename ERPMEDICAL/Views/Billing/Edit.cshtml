@@ -31,12 +31,12 @@
                                 </select>
 
                                 @*<select class="form-control info seleteddrop"
-                                            id="ddlVendors"
-                                            v-model="salesVm.vendorId">
-                                        <option v-for="vendor in vendors" v-bind:value="vendor.id">
-                                            {{vendor.name}}
-                                        </option>
-                                    </select>*@
+                        id="ddlVendors"
+                        v-model="salesVm.vendorId">
+                    <option v-for="vendor in vendors" v-bind:value="vendor.id">
+                        {{vendor.name}}
+                    </option>
+                </select>*@
                             </div>
                         </div>
                         <div class="form-group">
@@ -64,7 +64,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label"><input type="checkbox" id="chkOther" value="other" onclick="myFunction()"> Other</label>
+                            <label class="col-md-3 control-label">
+                                <input type="checkbox" id="chkOther" value="other" onclick="myFunction()">
+                                Other
+                            </label>
                             <div class="col-md-6">
                                 <input type="text"
                                        class="form-control "
@@ -74,7 +77,17 @@
                                        autocomplete="off">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total BASE VALUE</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalBaseValue"
+                                       name="TotalCgst"
+                                       v-model="salesVm.TotalBaseValue"
+                                       disabled="disabled">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Total CGST Amount</label>
                             <div class="col-md-6">
@@ -239,7 +252,6 @@
                                        id="txtDiscount"
                                        name="Discount"
                                        v-model="BillingItem.Discount"
-                                     
                                        autocomplete="off">
                             </div>
                         </div>
@@ -386,7 +398,8 @@
         var customerName = '@Model.CustomerName';
         var InvoiceDate = '@Model.InvoiceBill.InvoiceDate'
         var InvoiceNo = '@Model.InvoiceBill.InvoiceNo';
-        var otherCustomer='@Model.InvoiceBill.OtherCustomer'
+        var otherCustomer = '@Model.InvoiceBill.OtherCustomer';
+        var TotalBaseValue = '@Model.InvoiceBill.TotalBaseValue';
         var TCgstAmount = parseFloat(@Model.InvoiceBill.TotalCgst);
         var TSgstAmount = parseFloat(@Model.InvoiceBill.TotalSgst);
         var TIgstAmount = parseFloat(@Model.InvoiceBill.TotalIgst);

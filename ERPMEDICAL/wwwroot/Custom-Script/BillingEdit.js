@@ -47,6 +47,7 @@ const vm = new Vue({
             InvoiceDate: InvoiceDate,
             InvoiceNo: InvoiceNo,
             OtherCustomer: otherCustomer,
+            TotalBaseValue: TotalBaseValue,
             TotalCGSTAmount: TCgstAmount,
             TotalSGSTAmount: TSgstAmount,
             TotalIGSTAmount: TIgstAmount,
@@ -364,6 +365,7 @@ const vm = new Vue({
                 InvoiceDate: vm.salesVm.InvoiceDate,
                 InvoiceNo: vm.salesVm.InvoiceNo,
                 OtherCustomer: vm.salesVm.OtherCustomer,
+                TotalBaseValue: vm.salesVm.TotalBaseValue,
                 TotalCgst: vm.salesVm.TotalCGSTAmount,
                 TotalAmount: vm.salesVm.TotalAmount,
                 TotalSgst: vm.salesVm.TotalSGSTAmount,
@@ -514,13 +516,16 @@ const vm = new Vue({
                 let cgstAmt = 0;
                 let sgstAmt = 0;
                 let igstAmt = 0;
+                let totalBaseValue = 0;
                 let TotalAmount = 0;
                 this.BillingItems.map(x => {
                     cgstAmt = (parseFloat(cgstAmt) + parseFloat(x.Cgst)).toFixed(2);
                     sgstAmt = (parseFloat(sgstAmt) + parseFloat(x.Sgst)).toFixed(2);
                     igstAmt = (parseFloat(igstAmt) + parseFloat(x.Igst)).toFixed(2);
                     TotalAmount = (parseFloat(TotalAmount) + parseFloat(x.Amount)).toFixed(2);
+                    totalBaseValue = (parseFloat(totalBaseValue) + parseFloat(x.TotalBaseValue)).toFixed(2);
                 });
+                this.salesVm.TotalBaseValue = parseFloat(totalBaseValue).toFixed(2);
                 this.salesVm.TotalCGSTAmount = parseFloat(cgstAmt).toFixed(2);
                 this.salesVm.TotalSGSTAmount = parseFloat(sgstAmt).toFixed(2);
                 this.salesVm.TotalIGSTAmount = parseFloat(igstAmt).toFixed(2);

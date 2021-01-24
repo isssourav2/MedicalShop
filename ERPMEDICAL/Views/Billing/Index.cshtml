@@ -27,22 +27,25 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.InvoiceDate)
+                       Invoice Date
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.InvoiceNo)
+                        Invoice No
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TotalCgst)
+                        Base Rate
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TotalSgst)
+                       Total CGST
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TotalIgst)
+                       Total SGST
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TotalAmount)
+                       Total IGST
+                    </th>
+                    <th>
+                       Total Amount
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -53,10 +56,13 @@
                     <tr>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.InvoiceDate)
+                           @Convert.ToDateTime(item.InvoiceDate).ToShortDateString()
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.InvoiceNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalBaseValue)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TotalCgst)

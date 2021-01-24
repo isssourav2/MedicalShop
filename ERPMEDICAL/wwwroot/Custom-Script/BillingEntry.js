@@ -46,7 +46,8 @@ const vm = new Vue({
             CustomerId: 0,
             InvoiceDate: "",
             InvoiceNo: "",
-            OtherCustomer:"",
+            OtherCustomer: "",
+            TotalBaseValue:0,
             TotalCGSTAmount: 0,
             TotalSGSTAmount: 0,
             TotalIGSTAmount: 0,
@@ -315,6 +316,7 @@ const vm = new Vue({
                 InvoiceDate: vm.salesVm.InvoiceDate,
                 InvoiceNo: vm.salesVm.InvoiceNo,
                 OtherCustomer: vm.salesVm.OtherCustomer,
+                TotalBaseValue: vm.salesVm.TotalBaseValue,
                 TotalCgst: vm.salesVm.TotalCGSTAmount,
                 TotalAmount: vm.salesVm.TotalAmount,
                 TotalSgst: vm.salesVm.TotalSGSTAmount,
@@ -460,7 +462,7 @@ const vm = new Vue({
                 // if (!this.deleteBillingItem)
                 // this.salesVm.BillingItems = [];
                 this.salesVm.BillingItems = this.BillingItems;
-                this.salesTotalAmount = (parseFloat(this.salesTotalAmount) + parseFloat(this.BillingItem.Amount));
+                this.salesTotalAmount = ((parseFloat(this.salesTotalAmount) + parseFloat(this.BillingItem.Amount))).toFixed(2);
                 this.salesVm.TotalAmount = this.salesTotalAmount;
                 console.log("state transaction state", $('#isOutSider').is(':checked'));
                 this.BillingItem.isInterStateTransaction = $('#isOutSider').is(':checked');
@@ -469,11 +471,14 @@ const vm = new Vue({
                 let cgstAmt = 0;
                 let sgstAmt = 0;
                 let igstAmt = 0;
+                let totalbaseValue = 0;
                 this.BillingItems.map(x => {
+                    totalbaseValue = (parseFloat(totalbaseValue) + parseFloat(x.BaseValue)).toFixed(2);
                     cgstAmt = (parseFloat(cgstAmt) + parseFloat(x.Cgst)).toFixed(2);
                     sgstAmt = (parseFloat(sgstAmt) + parseFloat(x.Sgst)).toFixed(2);
                     igstAmt = (parseFloat(igstAmt) + parseFloat(x.Igst)).toFixed(2);
                 });
+                this.salesVm.TotalBaseValue = parseFloat(totalbaseValue).toFixed(2);
                 this.salesVm.TotalCGSTAmount = parseFloat(cgstAmt).toFixed(2);
                 this.salesVm.TotalSGSTAmount = parseFloat(sgstAmt).toFixed(2);
                 this.salesVm.TotalIGSTAmount = parseFloat(igstAmt).toFixed(2);

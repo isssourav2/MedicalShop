@@ -423,14 +423,6 @@ namespace CoreModel.Model
 
             modelBuilder.Entity<InvoiceBill>(entity =>
             {
-                entity.HasIndex(e => e.CompanyBranchId)
-                    .HasName("CompanyBranchId_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("UserId_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnType("int(11)");
 
                 entity.Property(e => e.Baseid)
@@ -457,6 +449,8 @@ namespace CoreModel.Model
                 entity.Property(e => e.TotalAmount)
                     .HasColumnName("totalAmount")
                     .HasColumnType("decimal(8,2)");
+
+                entity.Property(e => e.TotalBaseValue).HasColumnType("decimal(8,2)");
 
                 entity.Property(e => e.TotalCgst)
                     .HasColumnName("totalCGST")
@@ -797,14 +791,6 @@ namespace CoreModel.Model
             {
                 entity.HasIndex(e => e.Baseid)
                     .HasName("baseid");
-
-                entity.HasIndex(e => e.CompanyBranchId)
-                    .HasName("CompanyBranchId_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("UserId_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")

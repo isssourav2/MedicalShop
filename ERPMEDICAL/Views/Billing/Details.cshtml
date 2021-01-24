@@ -26,6 +26,7 @@
                         <th>Invoice No</th>
                         <th>Customer Name</th>
                         <th>Invoice Date</th>
+                        <th>Total Base Value</th>
                         <th>Total CGST Amount</th>
                         <th class="hidden-phone">Total SGST Amount</th>
                         <th class="hidden-phone">Total IGST Amount</th>
@@ -43,6 +44,9 @@
                         </td>
                         <td>
                             @Model.InvoiceBill.InvoiceDate
+                        </td>
+                        <td>
+                            @Model.InvoiceBill.TotalBaseValue
                         </td>
                         <td>
                             @Model.InvoiceBill.TotalCgst

@@ -28,12 +28,12 @@
                                 </select>
 
                                 @*<select class="form-control info seleteddrop"
-                                            id="ddlVendors"
-                                            v-model="salesVm.vendorId">
-                                        <option v-for="vendor in vendors" v-bind:value="vendor.id">
-                                            {{vendor.name}}
-                                        </option>
-                                    </select>*@
+                        id="ddlVendors"
+                        v-model="salesVm.vendorId">
+                    <option v-for="vendor in vendors" v-bind:value="vendor.id">
+                        {{vendor.name}}
+                    </option>
+                </select>*@
                             </div>
                         </div>
                         <div class="form-group">
@@ -71,7 +71,17 @@
                                        autocomplete="off">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Total Base Rate</label>
+                            <div class="col-md-6">
+                                <input type="text"
+                                       class="form-control "
+                                       id="txtTotalAmount"
+                                       name="TotalCgst"
+                                       v-model="salesVm.TotalBaseValue"
+                                       disabled="disabled">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Total CGST Amount</label>
                             <div class="col-md-6">
@@ -234,7 +244,6 @@
                                        id="txtDiscount"
                                        name="Discount"
                                        v-model="BillingItem.Discount"
-                                     
                                        autocomplete="off">
                             </div>
                         </div>
