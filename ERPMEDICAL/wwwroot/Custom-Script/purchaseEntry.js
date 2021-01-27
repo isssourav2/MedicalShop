@@ -608,7 +608,7 @@ $(document).ready(function () {
                    //this.deletePurchaseOrderItem = false;
                 }
                 else {
-                    Swal.fire('Uplicate!', 'Duplicate Product is not allowed!', 'error')
+                   Swal.fire('Warining !!!!!!!!!!', 'Duplicate product will not be accepted!', 'warn')
                 }
                
             },
