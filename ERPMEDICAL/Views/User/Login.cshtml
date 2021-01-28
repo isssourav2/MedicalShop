@@ -49,7 +49,8 @@
                         <label>Company</label>
                         <select class="form-control info seleteddrop input-lg"
                                 id="ddlComapany"
-                                v-model="CompanyId">                            
+                                v-model="CompanyId"> 
+                            <option selected="selected" v-bind:value="0">Select Company</option> 
                             <option v-for="company in Companies[0]" v-bind:value="company.id">
                                 {{company.text}}
                             </option>
