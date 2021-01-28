@@ -47,9 +47,9 @@
                     </div>
                     <div class="form-group mb-lg">
                         <label>Company</label>
-                        <select class="form-control info seleteddrop"
+                        <select class="form-control info seleteddrop input-lg"
                                 id="ddlComapany"
-                                v-model="CompanyId">
+                                v-model="CompanyId">                            
                             <option v-for="company in Companies[0]" v-bind:value="company.id">
                                 {{company.text}}
                             </option>

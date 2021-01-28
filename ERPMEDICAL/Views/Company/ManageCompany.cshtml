@@ -50,14 +50,13 @@
                         </div>
                         <div class="col-md-2 form-group">
                             <label>DL No.</label><span></span>
-                            <input type="text" class="form-control" id="txtDLNo" name="txtDLNo" value="@Model.Dlno" placeholder="Enter driving License" autocomplete="off">
+                            <input type="text" class="form-control" id="txtDLNo" name="txtDLNo" value="@Model.Dlno" placeholder="Enter driving license" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Company")'">Cancel</button>
                             <button id="btnSubmitProduct" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="AddEditComBranch()">Submit</button>
-                            @*&nbsp;&nbsp;&nbsp;*@
+                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Company")'">Cancel</button>                            
                         </div>
                     </div>
                 </div>
