@@ -18,8 +18,7 @@ using ERPMEDICAL.Helper;
 namespace ERPMEDICAL.Controllers
 {
     public class BillingController : Controller
-    {
-        //
+    {        
         private ErpMedical _Context;
         private readonly IMapper _mapper;
         private ResponseStatus response_status;

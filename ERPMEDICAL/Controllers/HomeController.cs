@@ -10,8 +10,7 @@ using ERPMEDICAL.Helper;
 namespace ERPMEDICAL.Controllers
 {
     public class HomeController : Controller
-    {
-        //home
+    {        
         private ErpMedical _contextERP;
         public HomeController(ErpMedical contextERP)
         {
