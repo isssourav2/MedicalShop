@@ -430,7 +430,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnOrderItempopupClose">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnOrderItempopupClose" v-on:click="OnCancelData">Close</button>
                     <button type="button" class="btn btn-info" v-if="updatePurchaseOrderItem" v-on:click="onUpdateData">Update</button>
                     <button type="button" class="btn btn-primary" v-else v-on:click="onOrderItemSaved">Save changes</button>
                 </div>

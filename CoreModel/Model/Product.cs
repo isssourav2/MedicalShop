@@ -19,6 +19,7 @@ namespace CoreModel.Model
         public decimal CgstPer { get; set; }
         public decimal SgstPer { get; set; }
         public decimal IgstPer { get; set; }
+        public decimal? SalesPrice { get; set; }
 
         public virtual Base Base { get; set; }
     }

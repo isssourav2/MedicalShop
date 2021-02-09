@@ -607,6 +607,10 @@ namespace CoreModel.Model
                     .HasColumnName("rate")
                     .HasColumnType("decimal(8,2)");
 
+                entity.Property(e => e.SalesPrice)
+                    .HasColumnName("salesPrice")
+                    .HasColumnType("decimal(8,2)");
+
                 entity.Property(e => e.SgstPer)
                     .HasColumnName("sgstPer")
                     .HasColumnType("decimal(8,2)");
