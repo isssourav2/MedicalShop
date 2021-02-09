@@ -807,9 +807,7 @@ $(document).ready(function () {
             },
             OnCancelData: function () {
                 this.updatePurchaseOrderItem = false;
-                
             }
         }
-
     })
 })
