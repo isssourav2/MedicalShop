@@ -80,7 +80,7 @@
                     toastr.error("Password can't be left blank!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
                     return false;
                 }
-
+                
                 if (document.getElementById("ddlComapany").value === "0") {
                     toastr.error("Please select company!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
                     return false;
