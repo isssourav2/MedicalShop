@@ -75,7 +75,6 @@ $(document).ready(function () {
     //        $(this.el).trigger("change");
     //    }
     //});
-
     const vm = new Vue({
         el: "#app-container",
         data: {
