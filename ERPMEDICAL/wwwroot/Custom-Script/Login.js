@@ -85,7 +85,6 @@
                     toastr.error("Please select company!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
                     return false;
                 }
-
                 return true;
             }
         }
