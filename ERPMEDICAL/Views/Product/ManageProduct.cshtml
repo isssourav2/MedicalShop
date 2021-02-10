@@ -64,44 +64,30 @@
                             <input type="number" class="form-control" id="txtRate" name="txtRate" value="@Model.Rate" placeholder="Enter rate" autocomplete="off">
                         </div>
 
-
                         <div class="col-md-3 form-group">
                             <label>Discount</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtDiscount" name="txtDiscount" value="@Model.Discount" placeholder="Enter discount" autocomplete="off">
-                            @*<span class="input-group-btn">
-                <button class="btn btn-info" type="button">%</button>
-            </span>*@
+                            <input type="number" class="form-control" id="txtDiscount" name="txtDiscount" value="@Model.Discount" placeholder="Enter discount" autocomplete="off">            
                         </div>
 
                         <div class="col-md-2 form-group">
                             <label>CGST</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtCgstPer" name="txtCgstPer" value="@Model.CgstPer" placeholder="CGST Percentage">
-                            @*<span class="input-group-btn">
-                <button class="btn btn-info" type="button">%</button>
-            </span>*@
+                            <input type="number" class="form-control" id="txtCgstPer" name="txtCgstPer" value="@Model.CgstPer" placeholder="CGST Percentage">        
                         </div>
 
                         <div class="col-md-2 form-group">
                             <label>SGST</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtSgstPer" name="txtSgstPer" value="@Model.SgstPer" placeholder="SGST amount">
-                            @*<span class="input-group-btn">
-                <button class="btn btn-info" type="button">%</button>
-            </span>*@
+                            <input type="number" class="form-control" id="txtSgstPer" name="txtSgstPer" value="@Model.SgstPer" placeholder="SGST amount">              
                         </div>
 
                         <div class="col-md-2 form-group">
                             <label>IGST</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtIgstPer" name="txtIgstPer" value="@Model.IgstPer" placeholder="IGST amount">
-                            @*<span class="input-group-btn">
-                <button class="btn btn-info" type="button">%</button>
-            </span>*@
+                            <input type="number" class="form-control" id="txtIgstPer" name="txtIgstPer" value="@Model.IgstPer" placeholder="IGST amount">               
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Product")'">Cancel</button>
                             <button id="btnSubmitProduct" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="AddEditProduct()">Submit</button>
-                            @*&nbsp;&nbsp;&nbsp;*@
+                            <button id="btnCancel" name="btnSubmit" type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-danger" onclick="window.location.href='@Url.Action("List", "Product")'">Back</button>
                         </div>
                     </div>
                 </div>
