@@ -323,7 +323,7 @@ namespace ERPMEDICAL.Controllers
                 {
                     viewModel.CustomerName = string.Empty;
                 }
-
+                
                 var contextBills = _Context.InvoiceBillDetails.Where(x => x.BillId == id).ToList();
                 //List<InvoiceBillDetail> listInvoiceBill = new List<InvoiceBillDetail>();
                 //foreach (var item in contextBills)
