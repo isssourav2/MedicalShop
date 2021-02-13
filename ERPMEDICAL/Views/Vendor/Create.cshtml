@@ -1,93 +1,96 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="panel" id="app-container">
-    <form class="form-horizontal form-bordered">
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtVendorName">Vendor Name</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtVendorName"
-                       name="name"
-                       placeholder="Enter vendor name"
-                       autocomplete="off"
-                       v-on:input="handleChange($event)">
+
+<div class="row" id="app-container">
+    <div class="col-md-12">
+        <div data-collapsed="0" class="panel">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="panel-actions">
+                    </div>
+                    <h2 class="panel-title">ADD / EDIT VENDOR</h2>
+                </div>
             </div>
+
+            <form>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>Full Name <span style="color:red">*</span></label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="txtVendorName"
+                                   name="name"
+                                   placeholder="Enter vendor name"
+                                   autocomplete="off"
+                                   v-on:input="handleChange($event)">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Email Address</label>
+                            <input type="text"
+                                   class="form-control "
+                                   id="txtVendorEmail"
+                                   name="email"
+                                   placeholder="Enter email address"
+                                   autocomplete="off"
+                                   v-on:input="handleChange($event)">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Mobile No.</label>
+                            <input type="text"
+                                   class="form-control "
+                                   id="txtMobileNo"
+                                   name="mobileNo"
+                                   placeholder="Enter mobile no."
+                                   autocomplete="off"
+                                   v-on:input="handleChange($event)">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Full Address</label>
+                            <input type="text"                                      
+                                      class="form-control"
+                                      id="txtAddress"
+                                      placeholder="Enter address"
+                                      name="Address"
+                                      v-on:input="handleChange($event)">                               
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>GST No.</label>
+                            <input type="text"
+                                   class="form-control "
+                                   id="txtgstNo"
+                                   name="gstNo"
+                                   placeholder="Enter GST no."
+                                   autocomplete="off"
+                                   v-on:input="handleChange($event)">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>Company Name</label>
+                            <select class="form-control info" id="ddlCompany" v-model="vendor.companyId">
+                                <option v-for="company in companies" v-bind:value="company.id">
+                                    {{company.name}}
+                                </option>
+                            </select>
+                        </div>                       
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="onSubmit">Submit</button>
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-default" onclick="window.location.href='@Url.Action("Vendor", "Puchase")'">Back</button>                                                        
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtVendorEmail">Vendor Email</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtVendorEmail"
-                       name="email"
-                       placeholder="Enter email address"
-                       autocomplete="off"
-                       v-on:input="handleChange($event)">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtMobileNo">Vendor Mobile Number</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtMobileNo"
-                       name="mobileNo"
-                       placeholder="Enter mobile no."
-                       autocomplete="off"
-                       v-on:input="handleChange($event)">
-            </div>
-        </div>
-   
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtAddress">Address</label>
-            <div class="col-md-4">
-                <textarea rows="3"
-                          cols="3"
-                          class="form-control"
-                          id="txtAddress"
-                          placeholder="Enter address"
-                          name="Address"
-                          v-on:input="handleChange($event)">
-            </textarea>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtgstNo">GST NUmber</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtgstNo"
-                       name="gstNo"
-                       placeholder="Enter GST no."
-                       autocomplete="off"
-                       v-on:input="handleChange($event)">
-            </div>
-        </div>
-     
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtVendorName">Company</label>
-            <div class="col-md-4">
-                <select class="form-control info" id="ddlCompany" v-model="vendor.companyId">
-                    <option v-for="company in companies" v-bind:value="company.id">
-                        {{company.name}}
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
-                <button type="button" class="btn btn-primary" v-on:click="onSubmit">Save Changes</button>
-                <button type="button" class="btn btn-default" v-on:click="clearControl()">Close</button>
-            </div>
-        </div>
-    </form>
-    </section>
-    @section scripts {
-        <script src="~/Custom-Script/vendor.js"></script>
-    }
+    </div>
+</div>
+<!-- end: page -->
+@section scripts {
+    <script src="~/Custom-Script/vendor.js"></script>
+}
