@@ -397,7 +397,7 @@
         var Id = parseInt(@Model.InvoiceBill.Id);
         var customerId = parseInt(@Model.InvoiceBill.CustomerId);
         var customerName = '@Model.CustomerName';
-        var InvoiceDate = '@Model.InvoiceBill.InvoiceDate'
+        var InvoiceDate = '@Model.InvoiceBill.InvoiceDate.Value.ToShortDateString()'
         var InvoiceNo = '@Model.InvoiceBill.InvoiceNo';
         var otherCustomer = '@Model.InvoiceBill.OtherCustomer';
         var TotalBaseValue = '@Model.InvoiceBill.TotalBaseValue';
