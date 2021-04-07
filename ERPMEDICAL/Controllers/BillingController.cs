@@ -144,6 +144,7 @@ namespace ERPMEDICAL.Controllers
                     {
                         invoice.UserId = user.Id;
                         invoice.CompanyBranchId = user.CompanyBranchId;
+                        invoice.InvoiceDate = Convert.ToDateTime(invoice.InvoiceDate);
                     }
                     else
                     {
@@ -231,6 +232,7 @@ namespace ERPMEDICAL.Controllers
                     {
                         invoice.UserId = user.Id;
                         invoice.CompanyBranchId = user.CompanyBranchId;
+                        invoice.InvoiceDate = Convert.ToDateTime(invoice.InvoiceDate);
                     }
                     else
                     {

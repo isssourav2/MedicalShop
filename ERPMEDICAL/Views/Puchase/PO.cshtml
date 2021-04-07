@@ -32,7 +32,6 @@
                         <th>Invoice No</th>
                         <th>Vendor Name</th>
                         <th>Purchase Date</th>
-                        <th>Total Base Value</th>
                         <th>Total CGST Amount</th>
                         <th class="hidden-phone">Total SGST Amount</th>
                         <th class="hidden-phone">Total IGST Amount</th>
@@ -51,10 +50,7 @@
                                 @po.VendorName
                             </td>
                             <td>
-                                @po.
-                            </td>
-                            <td>
-                                @Convert.ToDateTime(po.OrderDate).ToShortDateString()
+                                @po.OrderDate
                             </td>
                             <td>
                                 @po.TotalCgst

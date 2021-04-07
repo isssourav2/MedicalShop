@@ -237,7 +237,9 @@ $(document).ready(function () {
                 vm.purchaseVm.doctorId = $(this).val();
             })
             //Purchase Date
-            $("#txtOrderDate").datepicker();
+            $("#txtOrderDate").datepicker({
+                format: 'dd-mm-yy'
+            });
             $("#txtOrderDate").on('change', function () {
                
                 let datevalue = $(this).val();
@@ -253,63 +255,63 @@ $(document).ready(function () {
             //}
         },
         watch: {
-            'purchaseOrderItem.CgstPercentage'(newVal) {
-                let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
-                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-              //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
-                //cgst amount
-                newVal = newVal == undefined ? 0 : newVal;
-                vm.purchaseOrderItem.CgstPercentage = newVal;
-                let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
-                //sgst amount
-                vm.purchaseOrderItem.SgstPercentage = parseFloat(vm.purchaseOrderItem.SgstPercentage);
-                let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.SgstPercentage) / 100));
+            //'purchaseOrderItem.CgstPercentage'(newVal) {
+            //    let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+            //    let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
+            //  //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+            //    //cgst amount
+            //    newVal = newVal == undefined ? 0 : newVal;
+            //    vm.purchaseOrderItem.CgstPercentage = newVal;
+            //    let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+            //    //sgst amount
+            //    vm.purchaseOrderItem.SgstPercentage = parseFloat(vm.purchaseOrderItem.SgstPercentage);
+            //    let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.SgstPercentage) / 100));
 
-                vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
-                // vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
-                vm.purchaseOrderItem.Amount =
-                    (parseFloat(vm.purchaseOrderItem.Cgst) +
-                        parseFloat(sgstAmount) +
-                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-            },
-            'purchaseOrderItem.SgstPercentage'(newVal) {
-                let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
-                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-              //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
-                //cgst amount
-                vm.purchaseOrderItem.CgstPercentage = parseFloat(vm.purchaseOrderItem.CgstPercentage);
-                let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.CgstPercentage) / 100));
-                //sgst amount
+            //    vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+            //    // vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
+            //    vm.purchaseOrderItem.Amount =
+            //        (parseFloat(vm.purchaseOrderItem.Cgst) +
+            //            parseFloat(sgstAmount) +
+            //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+            //},
+            //'purchaseOrderItem.SgstPercentage'(newVal) {
+            //    let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+            //    let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
+            //  //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+            //    //cgst amount
+            //    vm.purchaseOrderItem.CgstPercentage = parseFloat(vm.purchaseOrderItem.CgstPercentage);
+            //    let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.CgstPercentage) / 100));
+            //    //sgst amount
                
-                newVal = newVal == undefined ? 0 : newVal;
-                vm.purchaseOrderItem.SgstPercentage = newVal;
-                let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+            //    newVal = newVal == undefined ? 0 : newVal;
+            //    vm.purchaseOrderItem.SgstPercentage = newVal;
+            //    let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
 
-                //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
-                vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
-                vm.purchaseOrderItem.Amount =
-                    (parseFloat(cgstAmount) +
-                        parseFloat(vm.purchaseOrderItem.Sgst) +
-                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-                // vm.onchangeTaxValueChange(newVal);
-            },
-            'purchaseOrderItem.IgstPercentage'(newVal) {
+            //    //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+            //    vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
+            //    vm.purchaseOrderItem.Amount =
+            //        (parseFloat(cgstAmount) +
+            //            parseFloat(vm.purchaseOrderItem.Sgst) +
+            //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+            //    // vm.onchangeTaxValueChange(newVal);
+            //},
+            //'purchaseOrderItem.IgstPercentage'(newVal) {
                
-                let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
-                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-             //   vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
-                //igst amount
-             //   let percentage = vm.purchaseOrderItem.IgstPercentage
-                newVal = newVal == undefined ? 0 : newVal == "" ? 0 : newVal;
-                vm.purchaseOrderItem.IgstPercentage = newVal;
-                let igstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
-                //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
-                vm.purchaseOrderItem.Igst = igstAmount.toFixed(2);
-                vm.purchaseOrderItem.Amount =
-                    (parseFloat(vm.purchaseOrderItem.Igst) +
-                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-                // vm.onchangeTaxValueChange(newVal);
-            }
+            //    let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+            //    let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
+            // //   vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+            //    //igst amount
+            // //   let percentage = vm.purchaseOrderItem.IgstPercentage
+            //    newVal = newVal == undefined ? 0 : newVal == "" ? 0 : newVal;
+            //    vm.purchaseOrderItem.IgstPercentage = newVal;
+            //    let igstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+            //    //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+            //    vm.purchaseOrderItem.Igst = igstAmount.toFixed(2);
+            //    vm.purchaseOrderItem.Amount =
+            //        (parseFloat(vm.purchaseOrderItem.Igst) +
+            //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+            //    // vm.onchangeTaxValueChange(newVal);
+            //}
         },
         destroyed: function () {
 
@@ -544,9 +546,11 @@ $(document).ready(function () {
             },
             //for tax value calculation before tax (rate*qty)*discountPercentage
             calculateAmount(event) {
-                let taxvalue = (this.purchaseOrderItem.Rate * (event.target.value)) * (this.purchaseOrderItem.Discount / 100);
-                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-               // this.purchaseOrderItem.TaxValue = (this.purchaseOrderItem.Rate + taxvalue).toFixed(2);
+                let taxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+                let beforeTaxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) - taxvalue);
+                vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+                // this.purchaseOrderItem.TaxValue = (this.purchaseOrderItem.Rate + taxvalue).toFixed(2);
+                //let beforeTaxvalue = this.purchaseOrderItem.taxvalue;
                 //change amount with tax
                 let cgstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.CgstPercentage / 100));
                 //sgst amount
@@ -558,7 +562,7 @@ $(document).ready(function () {
                 this.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
                 this.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
                 this.purchaseOrderItem.Igst = igstAmount.toFixed(2);
-
+                debugger
                 //Amount value
                 this.purchaseOrderItem.Amount = (parseFloat(this.purchaseOrderItem.Cgst) +
                     parseFloat(this.purchaseOrderItem.Sgst) +
@@ -566,8 +570,8 @@ $(document).ready(function () {
                     parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
 
 
-               // this.deletePurchaseOrderItem = false;
-               // this.updatePurchaseOrderItem = false;
+                // this.deletePurchaseOrderItem = false;
+                // this.updatePurchaseOrderItem = false;
             },
             onChange(event) {
                 let vm = this;

@@ -193,7 +193,9 @@ const vm = new Vue({
         })
 
         //Invoice Date
-        $("#txtInvoiceDate").datepicker();
+        $("#txtInvoiceDate").datepicker({
+            format: 'dd-mm-yy'
+        });
         $("#txtInvoiceDate").on('change', function () {
 
             let datevalue = $(this).val();
@@ -410,10 +412,12 @@ const vm = new Vue({
         },
         //for tax value calculation before tax (BaseValue*qty)*discountPercentage
         calculateAmount(event) {
-            debugger;
-            let taxvalue = (this.BillingItem.BaseValue * (event.target.value)) * (this.BillingItem.Discount / 100);
-            let beforeTaxvalue = (parseFloat(this.BillingItem.BaseValue) + taxvalue);
-           this.BillingItem.BaseValue = (parseFloat(this.BillingItem.BaseValue)).toFixed(2);
+                    
+
+            let taxvalue = (this.BillingItem.Rate * parseInt(event.target.value)) * (this.BillingItem.Discount / 100);
+            let beforeTaxvalue = ((parseInt(this.BillingItem.Qty) * this.BillingItem.Rate) - taxvalue);
+            this.BillingItem.BaseValue = (parseFloat(beforeTaxvalue)).toFixed(2);
+            //  let BaseValue = (this.BillingItem.Rate + taxvalue).toFixed(2);
             //change amount with tax
             let cgstAmount = (beforeTaxvalue.toFixed(2) * (this.BillingItem.CgstPercentage / 100));
             //sgst amount
@@ -431,7 +435,6 @@ const vm = new Vue({
                 parseFloat(this.BillingItem.Sgst) +
                 parseFloat(this.BillingItem.Igst) +
                 parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-
 
             // this.deleteBillingItem = false;
             // this.updateBillingItem = false;

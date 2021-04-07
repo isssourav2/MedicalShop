@@ -146,6 +146,7 @@ namespace ERPMEDICAL.Controllers
                 vm.DoctorName = _Context.DoctorDetails.Where(m => m.Id == po.DoctorId).SingleOrDefault() != null ? _Context.DoctorDetails.SingleOrDefault(s => s.Id == po.DoctorId).Name : "";
                 vm.VendorName = _Context.Vendor.SingleOrDefault(s => s.Id == po.VendorId) != null ? _Context.Vendor.SingleOrDefault(s => s.Id == po.VendorId).Name : "";
                 vm.PoOrder = po;
+                vm.PoOrder.OrderDate = po.OrderDate.Date;
                 vm.OrderItems = _Context.PurchaseOrderItem.Where(poi => poi.PoId == po.Id).ToList();
                 return View(vm);
             }
@@ -231,6 +232,7 @@ namespace ERPMEDICAL.Controllers
                     {
                         poOrder.UserId = user.Id;
                         poOrder.CompanyBranchId = user.CompanyBranchId;
+                        poOrder.OrderDate = Convert.ToDateTime(poOrder.OrderDate);
                     }
                     else
                     {
@@ -329,6 +331,7 @@ namespace ERPMEDICAL.Controllers
                     {
                         poOrder.UserId = user.Id;
                         poOrder.CompanyBranchId = user.CompanyBranchId;
+                        poOrder.OrderDate = Convert.ToDateTime(poOrder.OrderDate);
                     }
                     else
                     {

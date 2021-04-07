@@ -27,25 +27,25 @@
             <thead>
                 <tr>
                     <th>
-                       Invoice Date
+                        Invoice No
                     </th>
                     <th>
-                        Invoice No
+                        Invoice Date
                     </th>
                     <th>
                         Base Rate
                     </th>
                     <th>
-                       Total CGST
+                        Total CGST
                     </th>
                     <th>
-                       Total SGST
+                        Total SGST
                     </th>
                     <th>
-                       Total IGST
+                        Total IGST
                     </th>
                     <th>
-                       Total Amount
+                        Total Amount
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -53,40 +53,39 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-
-                        <td>
-                           @Convert.ToDateTime(item.InvoiceDate).ToShortDateString()
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.InvoiceNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalBaseValue)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalCgst)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalSgst)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalIgst)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalAmount)
-                        </td>
-                        <td>
-                            <a href="@Url.Action("Details", "Billing",new { Id=item.Id })" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                            @*<button type="button" id="poView" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
-                            <a href="@Url.Action("Edit", "Billing",new { Id=item.Id })" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                            @*<button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>*@
-                            <a href="@Url.Action("Delete", "Billing",new { Id=item.Id })" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-                            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvoiceNo)
+                    </td>
+                    <td>
+                        @item.InvoiceDate
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalBaseValue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalCgst)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalSgst)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalIgst)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "Billing",new { Id=item.Id })" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                        @*<button type="button" id="poView" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
+                        <a href="@Url.Action("Edit", "Billing",new { Id=item.Id })" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                        @*<button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>*@
+                        <a href="@Url.Action("Delete", "Billing",new { Id=item.Id })" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

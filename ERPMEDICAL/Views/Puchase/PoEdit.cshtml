@@ -450,7 +450,7 @@
         var doctorName = '@Model.DoctorName';
         var vendorId = parseInt(@Model.PoOrder.VendorId);
         var vendorName = '@Model.VendorName';
-        var perchaseOrder = '@Model.PoOrder.OrderDate'
+        var perchaseOrder = '@Model.PoOrder.OrderDate.ToShortDateString()'
         var narration = '@Model.PoOrder.Naration'
         var InvoiceNo = '@Model.PoOrder.InvoiceNo';
         var TCgstAmount = parseFloat(@Model.PoOrder.TotalCgst);
