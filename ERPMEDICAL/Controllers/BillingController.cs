@@ -14,6 +14,7 @@ using iTextSharp.text;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp;
 using ERPMEDICAL.Helper;
+using System.Text.RegularExpressions;
 
 namespace ERPMEDICAL.Controllers
 {
@@ -406,7 +407,7 @@ namespace ERPMEDICAL.Controllers
         }
 
         [Obsolete]
-        public async Task<IActionResult> BillPreviewDownload()
+        public async Task<IActionResult> BillDownload()
         {
             try
             {
@@ -423,8 +424,8 @@ namespace ERPMEDICAL.Controllers
                     string Content = Reader.ReadToEnd();
                     string blank = "---";
                     //replaced by dynamic data
-                    //TempContent = Regex.Replace(Content, "txtReqID", model.TravelReqID.ToString());
-                    //TempContent = Regex.Replace(TempContent, "txtLetterGenDate", DateTime.Now.ToString("dddd, dd MMMM yyyy"));
+                    TempContent = Regex.Replace(Content, "#CustGSTNo#", "01254825");
+                    TempContent = Regex.Replace(TempContent, "#DLNo#", "DL565214");
                     //TempContent = Regex.Replace(TempContent, "txtReqBy", model.EmpName);
                     //TempContent = Regex.Replace(TempContent, "txtReqDate", model.strRequisitionDate);
                     //TempContent = Regex.Replace(TempContent, "txtSapOrg", model.SapOrgName);
@@ -456,7 +457,7 @@ namespace ERPMEDICAL.Controllers
 
                     //StringBuilder sb = new StringBuilder();                                        
                     //StringReader sr = new StringReader(TempContent);
-                    TextReader textReader = new StringReader(Content);
+                    TextReader textReader = new StringReader(TempContent);
                     string dateTime = DateTime.Now.ToString("ddMMyy-HHmmffff");
 
                     //create pdf file in a folder

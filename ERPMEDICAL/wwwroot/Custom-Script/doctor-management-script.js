@@ -100,8 +100,7 @@
     });
 }
 
-function DeleteDoctorByID(Param) {
-    //console.log("Product ID: ", productID);
+function DeleteDoctorByID(Param) {   
     Swal.fire({
         title: 'Are you sure to delete this record?',
         text: 'You can not revert back!',
@@ -132,12 +131,12 @@ function DeleteDoctorByID(Param) {
                             }
                         });
                     }
-                    else {
-                        alert("Server Error Occurred!");
+                    else {                        
+                        toastr.error("Server Error Occurred!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
                     }
                 },
                 error: function () {
-                    alert("Client Error Occurred!");
+                    toastr.error("Client Error Occurred!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
                 }
             });
         }

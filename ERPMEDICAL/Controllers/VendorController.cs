@@ -53,7 +53,7 @@ namespace ERPMEDICAL.Controllers
             }
         }
 
-            // POST: VendorController/Create
+        
         [Route("/Vendor")]
         [HttpPost]
         public JsonResult Post(Vendor vendor)
@@ -79,17 +79,17 @@ namespace ERPMEDICAL.Controllers
                 response_status.successMessage = "data inserted successfull!!";
                 return Json(response_status);
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
                 response_status.id = vendor.Id;
                 response_status.status = false;
-                response_status.errorMessage = "data inserted not successfull!!";
+                response_status.errorMessage = ex.Message;
                 return Json(response_status);
             }
            
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(string VendorID)
         {
             User user = SessionHelper.GetObjectFromJson<User>(HttpContext.Session, "userObject");
             if (user != null)
@@ -168,11 +168,9 @@ namespace ERPMEDICAL.Controllers
             return Json(vendorCom);   
         }
 
-
-        // POST: VendorController/Delete/5
-        [Route("/Vendor/delete")]
-        [HttpDelete]
-        public ActionResult Delete(int id)
+        
+        [Route("Vendor/DeleteVendor")]        
+        public JsonResult Delete(int VendorID)
         {
             try
             {
@@ -180,27 +178,28 @@ namespace ERPMEDICAL.Controllers
                 if (user != null)
                 {
                     ViewBag.CurrentUser = user;
-                    //first find the objet from vendor
-                    var vendordata = _Context.Vendor.Where(o => o.Id == id).SingleOrDefault();
+                    
+                    var vendordata = _Context.Vendor.Where(o => o.Id == VendorID).SingleOrDefault();
                     response_status.id = vendordata.Id;
-                    //delete the object by id 
+                    
                     _Context.Vendor.Remove(vendordata);
                     _Context.SaveChanges();
                     response_status.status = true;
-                    response_status.successMessage = "data deleted successfull!!";
+                    response_status.successMessage = "Vendor Deleted Successfully!";
                     return Json(response_status);
                 }
                 else
                 {
-                    return Redirect("/User/Login");
+                    response_status.status = false;
+                    response_status.errorMessage = "Session Time Out!";
+                    return Json(response_status);
                 }
                 
             }
             catch (Exception Err)
-            {
-                response_status.id = id;
+            {                
                 response_status.status = false;
-                response_status.errorMessage = "data deleted not successfull!!";
+                response_status.errorMessage = Err.Message;
                 return Json(response_status);
             }
         }
