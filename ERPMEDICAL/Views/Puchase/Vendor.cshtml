@@ -3,55 +3,59 @@
     ViewData["Title"] = "Vendor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <!-- start: page -->
-<section class="panel" id="app-container">
+<section class="panel">
     <header class="panel-heading">
-        <div class="panel-actions">
-            <a href="#" class="fa fa-caret-down"></a>
-            <a href="#" class="fa fa-times"></a>
-        </div>
-        <h2 class="panel-title">VENDOR LIST</h2>
+        <h2 class="panel-title">ALL VENDORS</h2>
     </header>
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-md">
-                    @*<button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>*@
-                    @Html.ActionLink("Create New", "Create", "Vendor",null,new { @class= "btn btn-primary" })
+                    <button id="addToTable" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create", "Vendor")'">ADD VENDOR <i class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped mb-none" id="datatable-editable">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Mobile Number</th>
+                    <th>Doctor Name</th>
+                    <th>Email ID</th>
+                    <th>Contact No.</th>
                     <th>Address</th>
-                    <th>GST Number</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>GST No.</th>
+                    <th>EDIt</th>
+                    <th>DELETE</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="gradeX" v-for="(item, index) in vendors">
-                    <td>{{item.name}}</td>
-                    <td>
-                        {{item.email}}
-                    </td>
-                    <td>{{item.mobileNo}}</td>
-                    <td>{{item.address}}</td>
-                    <td>{{item.gstNo}}</td>
-                    <td><a href="javascript:void(0)" class="on-default edit-row" v-on:click="onEdit(item)"><i class="fa fa-pencil"></i></a></td>
-                    <td><a href="javascript:void(0)" class="on-default remove-row" v-on:click="onDelete(item)"><i class="fa fa-trash-o"></i></a></td>          
-                </tr>
+                @foreach (var item in ViewBag.VendorList)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.MobileNo</td>
+                        <td>@item.Address</td>
+                        <td>@item.GstNo</td>                      
+                        <td>
+                            <center>                                
+                                <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("Edit", "Vendor", new { VendorID=item.Id})'"><i class="fa fa-edit"></i></button>                                
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <button type="button" class="btn btn-danger" onclick="DeleteVendorByID(@item.Id)"><i class="fa fa-trash-o"></i></button>
+                            </center>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
-    
-
 </section>
 <!-- end: page -->
+
 @section scripts {
     <script src="~/Custom-Script/vendor.js"></script>
 }

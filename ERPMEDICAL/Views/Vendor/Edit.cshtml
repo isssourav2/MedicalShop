@@ -4,87 +4,93 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="panel" id="app-container">
-    <form class="form-horizontal form-bordered">
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtVendorName">Vendor Name</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtVendorName"
-                       name="name"
-                       autocomplete="off"
-                     v-model="vendor.name">
+<div class="row" id="app-container">
+    <div class="col-md-12">
+        <div data-collapsed="0" class="panel">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="panel-actions">
+                    </div>
+                    <h2 class="panel-title">EDIT VENDOR</h2>
+                </div>
             </div>
+
+            <form>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>Full Name <span style="color:red">*</span></label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="txtVendorName"
+                                   name="txtVendorName"
+                                   placeholder="Enter vendor name"
+                                   autocomplete="off"
+                                   v-model="vendor.name" />
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Email Address</label>
+                            <input type="text"
+                                   class="form-control "
+                                   id="txtVendorEmail"
+                                   name="txtVendorEmail"
+                                   placeholder="Enter email address"
+                                   autocomplete="off"
+                                   v-model="vendor.email" />
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Mobile No.</label>
+                            <input type="text"
+                                   class="form-control "
+                                   id="txtMobileNo"
+                                   name="txtMobileNo"
+                                   placeholder="Enter mobile no."
+                                   autocomplete="off"
+                                   v-model="vendor.mobileNo" />
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Full Address</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="txtAddress"
+                                   placeholder="Enter address"
+                                   name="txtAddress"
+                                   v-model="vendor.address" />
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>GST No.</label>
+                            <input type="text"
+                                   class="form-control "
+                                   id="txtgstNo"
+                                   name="txtgstNo"
+                                   placeholder="Enter GST no."
+                                   autocomplete="off"
+                                   v-model="vendor.gstNo" />
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>Company Name</label>
+                            <select class="form-control info" id="ddlCompany" v-model="vendor.companyId">
+                                <option v-for="company in companies" v-bind:value="company.id">
+                                    {{company.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" v-on:click="onUpdate">Update</button>
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-lg btn-default" onclick="window.location.href='@Url.Action("Vendor", "Puchase")'">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtVendorEmail">Vendor Email</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtVendorEmail"
-                       name="email"
-                       autocomplete="off"
-                        v-model="vendor.email">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtMobileNo">Vendor Mobile Number</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtMobileNo"
-                       name="mobileNo"
-                       autocomplete="off"
-                        v-model="vendor.mobileNo">
-            </div>
-        </div>
-       
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtAddress">Address</label>
-            <div class="col-md-4">
-                <textarea rows="5"
-                          cols="7"
-                          class="form-control"
-                          id="txtAddress"
-                          name="Address"
-                          :value="vendor.address"
-                          v-model="vendor.Address">
-            </textarea>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="txtgstNo">GST NUmber</label>
-            <div class="col-md-4">
-                <input type="text"
-                       class="form-control "
-                       id="txtgstNo"
-                       name="gstNo"
-                       autocomplete="off"
-                       v-model="vendor.gstNo">
-            </div>
-        </div>
-       
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="ddlCompany">Company</label>
-            <div class="col-md-4">
-                <select class="form-control info" id="ddlCompany" v-model="vendor.companyId">
-                    <option v-for="company in companies" v-bind:value="company.id">
-                        {{company.name}}
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
-                <button type="button" class="btn btn-primary" v-on:click="onUpdate">Save changes</button>
-                <button type="button" class="btn btn-default">Close</button>
-            </div>
-        </div>
-    </form>
-</section>
+    </div>
+</div>
 @section scripts {
     <script src="~/Custom-Script/vendor.js"></script>
 }

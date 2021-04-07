@@ -33,8 +33,9 @@ namespace ERPMEDICAL.Controllers
             if (user != null)
             {
                 ViewBag.CurrentUser = user;
-                var vendor = _Context.Vendor.ToList();
-                return View(vendor);
+                var vendorList = _Context.Vendor.ToList();
+                ViewBag.VendorList = vendorList;
+                return View(vendorList);
             }
             else
             {

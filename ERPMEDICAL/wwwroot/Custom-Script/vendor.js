@@ -1,10 +1,5 @@
-﻿/// <reference path="../js/vue/vue.min.js" />
-/// <reference path="../js/axios.min.js" />
-
-
-
-
-
+﻿// <reference path="../js/vue/vue.min.js" />
+// <reference path="../js/axios.min.js" />
 window.onload = function () {
     const PageLoad = function (thisObj) {
         let vm = thisObj;
@@ -67,7 +62,7 @@ window.onload = function () {
                     name: "",
                     email: "",
                     mobileNo: "",
-                    Address: "",
+                    address: "",
                     gstNo: ""
                 }
             }
@@ -158,7 +153,7 @@ window.onload = function () {
                     Name: vm.vendor.name,
                     Email: vm.vendor.email,
                     MobileNo: vm.vendor.mobileNo,
-                    Address: vm.vendor.Address,
+                    Address: vm.vendor.address,
                     GstNo: vm.vendor.gstNo,
                     CompanyId: vm.vendor.companyId
                 }
@@ -225,5 +220,50 @@ window.onload = function () {
             }
         }
 
+    })
+}
+
+function DeleteVendorByID(VendorID) {
+    //console.log("Product ID: ", productID);
+    Swal.fire({
+        title: 'Are you sure to delete this record?',
+        text: 'You can not revert back!',
+        showCancelButton: true,
+        confirmButtonText: `Delete`,
+        allowOutsideClick: false
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "/Vendor/DeleteVendor",
+                dataType: "json",
+                //contentType: "application/json",
+                data: { "VendorID": parseInt(VendorID) },
+                success: function (response) {
+                    if (response.status === true) {
+                        Swal.fire({
+                            title: "SUCCESS!",
+                            text: response.successMessage,
+                            type: "success",
+                            confirmButtonClass: 'btn btn-success',
+                            buttonsStyling: true,
+                            allowOutsideClick: false,
+                        })
+                        .then(function (returnVal) {
+                        if (returnVal.value) {
+                            window.location.reload();
+                        }
+                        });
+                    }
+                    else {
+                        toastr.error("Server Error Occurred!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    }
+                },
+                error: function () {
+                    toastr.error("Client Error Occurred!", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                }
+            });
+        }
     })
 }
