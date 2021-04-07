@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Invoice Date</label>
+                            <label class="col-md-3 control-label">Invoice Date <span style="color:red;">*</span></label>
                             <div class="col-md-6">
                                 <input type="text"
                                        class="form-control"
@@ -60,6 +60,7 @@
                                        class="form-control "
                                        id="txtInvoiceNo"
                                        name="InvoiceNo"
+                                       readonly="readonly"
                                        v-model="salesVm.InvoiceNo"
                                        autocomplete="off">
                             </div>
@@ -214,12 +215,6 @@
                                 <select id="ddlProduct" class="form-control info" style="width:300px;">
                                     <option value="0">Select Product</option>
                                 </select>
-                                @*<select class="form-control info" id="ddlProduct" v-model="BillingItem.ProductId" v-on:change="onChange($event)">
-                    <option value="0" selected="selected">Select Product</option>
-                    <option v-for="purch in products" v-bind:value="purch.id">
-                        {{purch.productName}}
-                    </option>
-                </select>*@
                             </div>
                         </div>
                         <div class="form-group">
@@ -229,7 +224,7 @@
                                        class="form-control"
                                        id="txtPackage"
                                        name="Package"
-                                       v-model="BillingItem.Package"
+                                       v-model="DisplayVmObj.Package"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -240,8 +235,7 @@
                                        class="form-control "
                                        id="txtRate"
                                        name="Rate"
-                                       v-model="BillingItem.Rate"
-                                     
+                                       v-model="DisplayVmObj.Rate"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -252,7 +246,7 @@
                                        class="form-control "
                                        id="txtDiscount"
                                        name="Discount"
-                                       v-model="BillingItem.Discount"
+                                       v-model="DisplayVmObj.Discount"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -264,9 +258,12 @@
                                        class="form-control "
                                        id="txtQty"
                                        name="Qty"
-                                       v-model="BillingItem.Qty"
+                                       v-model="DisplayVmObj.Qty"
                                        v-on:change="calculateAmount($event)"
                                        autocomplete="off">
+                            </div>
+                            <div class="col col-md-3">
+                                <span class="badge" id="lblStockQty" name="stockQty">{{BillingItem.stockQty}}</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -276,8 +273,7 @@
                                        class="form-control "
                                        id="txtBaseValue"
                                        name="BaseValue"
-                                       v-model="BillingItem.BaseValue"
-                                     
+                                       v-model="DisplayVmObj.BaseValue"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -295,7 +291,7 @@
                                        class="form-control "
                                        id="txtcgstPercentage"
                                        name="cgstPercentage"
-                                       v-model="BillingItem.CgstPercentage"
+                                       v-model="DisplayVmObj.CgstPercentage"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -307,7 +303,7 @@
                                        id="txtcgst"
                                        name="cgst"
                                        autocomplete="off"
-                                       v-model="BillingItem.Cgst"
+                                       v-model="DisplayVmObj.Cgst"
                                      >
                             </div>
                         </div>
@@ -317,7 +313,7 @@
                                 <input type="text"
                                        class="form-control "
                                        id="txtsgstPercentage"
-                                       v-model="BillingItem.SgstPercentage"
+                                       v-model="DisplayVmObj.SgstPercentage"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -329,7 +325,7 @@
                                        id="txtsgst"
                                        name="sgst"
                                        autocomplete="off"
-                                       v-model="BillingItem.Sgst"
+                                       v-model="DisplayVmObj.Sgst"
                                      >
                             </div>
                         </div>
@@ -342,7 +338,7 @@
                                        class="form-control "
                                        id="txtIgstPercentage"
                                        name="IgstPercentage"
-                                       v-model="BillingItem.IgstPercentage"
+                                       v-model="DisplayVmObj.IgstPercentage"
                                        autocomplete="off">
                             </div>
                         </div>
@@ -354,7 +350,7 @@
                                        id="txtIgst"
                                        name="Igst"
                                        autocomplete="off"
-                                       v-model="BillingItem.Igst"
+                                       v-model="DisplayVmObj.Igst"
                                      >
                             </div>
                         </div>
@@ -367,14 +363,16 @@
                                        id="txtAmount"
                                        name="Amount"
                                        autocomplete="off"
-                                       v-model="BillingItem.Amount"
+                                       v-model="DisplayVmObj.Amount"
                                      >
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnOrderItempopupClose">Close</button>
+                    <button type="button" class="btn btn-secondary" v-if="DisplayVmObj.Rate==0 || DisplayVmObj.Qty==0" data-keyboard="false" data-backdrop="static"  id="btnOrderItempopupClose">Close</button>
+                    <button type="button" class="btn btn-secondary" v-else data-dismiss="modal"  id="btnOrderItempopupshow">Close</button>
+
                     <button type="button" class="btn btn-info" v-if="updateBillingItem" v-on:click="onUpdateData">Update</button>
                     <button type="button" class="btn btn-primary" v-else v-on:click="onOrderItemSaved">Save changes</button>
                 </div>
@@ -383,6 +381,7 @@
     </div>
 </div>
 
+<div id="btnEditModule"></div>
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -394,7 +393,7 @@
         var myArray = [];
         debugger;
 
-        var Id = parseInt(@Model.InvoiceBill.Id);
+
         var customerId = parseInt(@Model.InvoiceBill.CustomerId);
         var customerName = '@Model.CustomerName';
         var InvoiceDate = '@Model.InvoiceBill.InvoiceDate.Value.ToShortDateString()'
@@ -407,7 +406,7 @@
         var TAmount = parseFloat(@Model.InvoiceBill.TotalAmount);
 
         //Order Item Create
-        myArray=@Json.Serialize(Model.InvoiceBillDetails);
+    var  billingDetails=@Json.Serialize(Model.InvoiceBillDetails);
 
     </script>
     <script src="~/Custom-Script/BillingEdit.js"></script>

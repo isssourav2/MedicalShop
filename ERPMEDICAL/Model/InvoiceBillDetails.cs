@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CoreModel.Model
+namespace ERPMEDICAL.Model
 {
     public partial class InvoiceBillDetails
     {
@@ -22,6 +22,5 @@ namespace CoreModel.Model
         public decimal? Amount { get; set; }
         public int Qty { get; set; }
         public decimal? Rate { get; set; }
-        public int? StockQty { get; set; }
     }
 }

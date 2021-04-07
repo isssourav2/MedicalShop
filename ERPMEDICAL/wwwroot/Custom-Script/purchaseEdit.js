@@ -312,6 +312,30 @@ $(document).ready(function () {
             //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
             //    // vm.onchangeTaxValueChange(newVal);
             //}
+            'purchaseOrderItem.Discount'(newVal) {
+                let taxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+                let beforeTaxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) - taxvalue);
+                vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+                // this.purchaseOrderItem.TaxValue = (this.purchaseOrderItem.Rate + taxvalue).toFixed(2);
+                //let beforeTaxvalue = this.purchaseOrderItem.taxvalue;
+                //change amount with tax
+                let cgstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.CgstPercentage / 100));
+                //sgst amount
+                let sgstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.SgstPercentage / 100));
+                //igst amount
+                let igstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.IgstPercentage / 100));
+
+
+                this.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+                this.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
+                this.purchaseOrderItem.Igst = igstAmount.toFixed(2);
+                debugger
+                //Amount value
+                this.purchaseOrderItem.Amount = (parseFloat(this.purchaseOrderItem.Cgst) +
+                    parseFloat(this.purchaseOrderItem.Sgst) +
+                    parseFloat(this.purchaseOrderItem.Igst) +
+                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+            }
         },
         destroyed: function () {
 
@@ -509,7 +533,8 @@ $(document).ready(function () {
           
                 this.deletePurchaseOrderItem = false;
                 this.updatePurchaseOrderItem = false;
-                if (purchaseVm.InvoiceNo!="" && purchaseVm.VendorId != 0 && purchaseVm.OrderDate != "") {
+                if (vm.ValidatePurchaseOrderForm() !== false) {
+                    //if (purchaseVm.InvoiceNo!="" && purchaseVm.VendorId != 0 && purchaseVm.OrderDate != "") {
                     $.ajax({ url: "/PurchaseSave", data: purchaseVm, method: "POST" })
                         .done(function (response) {
                             // vm.bugs.splice(0, 0, newBug);
@@ -532,17 +557,24 @@ $(document).ready(function () {
                         });
                 }
                 else {
-                    var html = `<ol><li>Invoice No Required</li><li>Vendor is not seleted</li>
-                                <li>Order Date is not blank</li></ol>`;
-                    Swal.fire({
-                        title: '<strong>HTML <u>example</u></strong>',
-                        icon: 'info',
-                        html: html
-                        });
-                 //   swal({ html: true, title: 'Oops!', html: html });
+                    event.preventDefault();
+                    //   swal({ html: true, title: 'Oops!', html: html });
                     //swal('Oops!', html,"error");
-                   // $("#ddlDoctors").focus();
+                    // $("#ddlDoctors").focus();
                 }
+                //}
+                //else {
+                //    var html = `<ol><li>Invoice No Required</li><li>Vendor is not seleted</li>
+                //                <li>Order Date is not blank</li></ol>`;
+                //    Swal.fire({
+                //        title: '<strong>HTML <u>example</u></strong>',
+                //        icon: 'info',
+                //        html: html
+                //        });
+                // //   swal({ html: true, title: 'Oops!', html: html });
+                //    //swal('Oops!', html,"error");
+                //   // $("#ddlDoctors").focus();
+                //}
             },
             //for tax value calculation before tax (rate*qty)*discountPercentage
             calculateAmount(event) {
@@ -841,6 +873,22 @@ $(document).ready(function () {
                 this.updatePurchaseOrderItem = false;
                 $("#poitemCreateModel").modal('hide');
                 swal.fire('Good job!', 'Product update successfully!!', 'success');
+            },
+            ValidatePurchaseOrderForm: function () {
+                debugger;
+                if (document.getElementById("txtOrderDate").value === '') {
+                    toastr.error("OrderDate can't be blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    return false;
+                }
+                if (document.getElementById("txtNaration").value === '') {
+                    toastr.error("Naration can't be blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    return false;
+                }
+                if (document.getElementById("txtInvoiceNo").value === '') {
+                    toastr.error("InvoiceNo can't be blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    return false;
+                }
+                return true;
             }
         }
 

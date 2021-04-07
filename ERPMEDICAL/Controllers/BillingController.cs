@@ -56,10 +56,11 @@ namespace ERPMEDICAL.Controllers
             {
                 ViewBag.CurrentUser = user;
                 BillingViewModel viewModel = new BillingViewModel();
-                viewModel.InvoiceBill = _Context.InvoiceBill.FirstOrDefault(x => x.Id == id);
+                viewModel.InvoiceBill = _Context.InvoiceBill.FirstOrDefault(x => x.InvoiceNo == id);
                 if (viewModel.InvoiceBill.CustomerId != 0)
                 {
-                    viewModel.CustomerName = _Context.Customer.Where(x => x.Id == viewModel.InvoiceBill.CustomerId).FirstOrDefault().Name;
+                    viewModel.CustomerName = _Context.Customer
+                        .Where(x => x.Id == viewModel.InvoiceBill.CustomerId).FirstOrDefault().Name;
                 }
                 else
                 {
@@ -113,7 +114,7 @@ namespace ERPMEDICAL.Controllers
         {
             try
             {
-                if (BillingCollection.Id != 0)
+                if (Convert.ToInt32(BillingCollection.InvoiceNo) != 0)
                 {
                     //update base Table
                     Base basetable = new Base();
@@ -125,13 +126,14 @@ namespace ERPMEDICAL.Controllers
                     _Context.SaveChanges();
                     BillingCollection.Baseid = basetable.Id;
                     //Remove the old Entry
-                    var invoiceDetails = _Context.InvoiceBillDetails.Where(x => x.BillId == BillingCollection.Id).ToList();
+                    var invoiceDetails = _Context.InvoiceBillDetails.
+                        Where(x => x.BillId == Convert.ToInt32(BillingCollection.InvoiceNo)).ToList();
                     foreach (var item in invoiceDetails)
                     {
                         _Context.InvoiceBillDetails.Remove(item);
                         _Context.SaveChanges();
                     }
-                    var context = _Context.InvoiceBill.FirstOrDefault(x => x.Id == BillingCollection.Id);
+                    var context = _Context.InvoiceBill.FirstOrDefault(x => x.InvoiceNo == Convert.ToInt32(BillingCollection.InvoiceNo));
                     _Context.InvoiceBill.Remove(context);
                     _Context.SaveChanges();
 
@@ -156,7 +158,7 @@ namespace ERPMEDICAL.Controllers
                     //_Context.Entry(poOrder).CurrentValues.SetValues(poOrder);
                     _Context.SaveChanges();
 
-                    foreach (var item in BillingCollection.InvoiceBillDetails)
+                    foreach (var item in invoiceDetails)
                     {
                         var invoicebill = _Context.InvoiceBillDetails.Where(x => x.Id == item.Id).FirstOrDefault();
                         if (invoicebill != null)
@@ -165,7 +167,7 @@ namespace ERPMEDICAL.Controllers
                             _Context.SaveChanges();
                         }
                         item.Baseid = basetable.Id;
-                        item.BillId = invoice.Id;
+                        item.BillId = invoice.InvoiceNo;
                         //Add to blling details
                         _Context.InvoiceBillDetails.Add(item);
                         _Context.SaveChanges();
@@ -252,7 +254,7 @@ namespace ERPMEDICAL.Controllers
                             _Context.SaveChanges();
                         }
                         item.Baseid = basetable.Id;
-                        item.BillId = invoice.Id;
+                        item.BillId = invoice.InvoiceNo;
                         //Add to blling details
                         _Context.InvoiceBillDetails.Add(item);
                         _Context.SaveChanges();
@@ -316,7 +318,7 @@ namespace ERPMEDICAL.Controllers
             {
                 ViewBag.CurrentUser = user;
                 BillingViewModel viewModel = new BillingViewModel();
-                viewModel.InvoiceBill = _Context.InvoiceBill.FirstOrDefault(x => x.Id == id);
+                viewModel.InvoiceBill = _Context.InvoiceBill.FirstOrDefault(x => x.InvoiceNo == id);
                 if (viewModel.InvoiceBill.CustomerId != 0)
                 {
                     viewModel.CustomerName = _Context.Customer.Where(x => x.Id == viewModel.InvoiceBill.CustomerId).FirstOrDefault().Name;
@@ -327,13 +329,15 @@ namespace ERPMEDICAL.Controllers
                 }
                 
                 var contextBills = _Context.InvoiceBillDetails.Where(x => x.BillId == id).ToList();
-                //List<InvoiceBillDetail> listInvoiceBill = new List<InvoiceBillDetail>();
-                //foreach (var item in contextBills)
-                //{
-                //    var invoicebil = _mapper.Map<InvoiceBillDetail>(item);
-                //    listInvoiceBill.Add(invoicebil);
-                //}
-                viewModel.InvoiceBillDetails = contextBills;
+                List<InvoiceBillDetails> listInvoiceBill = new List<InvoiceBillDetails>();
+                foreach (var item in contextBills)
+                {
+                    //var invoicebil = _mapper.Map<InvoiceBillDetail>(item);
+                    item.StockQty = _Context.Stock.FirstOrDefault(stk => stk.ProductId == item.ProductId).StockQty.HasValue ?
+                        _Context.Stock.FirstOrDefault(stk => stk.ProductId == item.ProductId).StockQty.Value : 0;
+                    listInvoiceBill.Add(item);
+                }
+                viewModel.InvoiceBillDetails = listInvoiceBill;
                 return View(viewModel);
             }
             else
@@ -354,8 +358,9 @@ namespace ERPMEDICAL.Controllers
             {
                 ViewBag.CurrentUser = user;
                 BillingViewModel viewModel = new BillingViewModel();
-                viewModel.InvoiceBill = _Context.InvoiceBill.FirstOrDefault(x => x.Id == id);
+                viewModel.InvoiceBill = _Context.InvoiceBill.FirstOrDefault(x => x.InvoiceNo == id);
                 viewModel.CustomerName = viewModel.InvoiceBill.CustomerId!=0? _Context.Customer.Where(x => x.Id == viewModel.InvoiceBill.CustomerId).FirstOrDefault().Name:string.Empty;
+               
                 return View(viewModel);
             }
             else
@@ -382,8 +387,8 @@ namespace ERPMEDICAL.Controllers
                 billPrev.CompanySubHeading = companyRes.SubHeading;
                 billPrev.CompanyGSTNo = companyRes.Gstno;
                 billPrev.CompanyDLNo = companyRes.Dlno;
-                var invoice = _Context.InvoiceBill.FirstOrDefault(inv=>inv.Id==id);
-                billPrev.InvoiceNo = invoice.InvoiceNo;
+                var invoice = _Context.InvoiceBill.FirstOrDefault(inv=>inv.InvoiceNo==id);
+                billPrev.InvoiceNo = invoice.InvoiceNo.ToString();
                 billPrev.InvoiceDate = invoice.InvoiceDate.Value.ToString("dd/MM/yyyy");
                 billPrev.BillTotalAmount = invoice.TotalAmount.Value;
                 var customerObj = _Context.Customer.FirstOrDefault(cust => cust.Id ==invoice.CustomerId.Value);
@@ -412,79 +417,87 @@ namespace ERPMEDICAL.Controllers
         {
             try
             {
-                //getting the root path
-                string webRootPath = hostingEnv.WebRootPath;
-                string PathWithFolder = Path.Combine(webRootPath, "html");
-                string HtmlFileName = "InvoiceBill.html";
-                //get html filepath with directory                
-                string fullFilePath = Path.Combine(PathWithFolder, HtmlFileName);
-                using (StreamReader Reader = new StreamReader(fullFilePath))
+                User user = SessionHelper.GetObjectFromJson<User>(HttpContext.Session, "userObject");
+                if (user != null)
                 {
-                    //TravelRequisitionModel model = trvlReqRepository.GetTrvlReqDetailViewByReqID(TrvlReqID, configuration);
-                    string TempContent = null;
-                    string Content = Reader.ReadToEnd();
-                    string blank = "---";
-                    //replaced by dynamic data
-                    //TempContent = Regex.Replace(Content, "txtReqID", model.TravelReqID.ToString());
-                    //TempContent = Regex.Replace(TempContent, "txtLetterGenDate", DateTime.Now.ToString("dddd, dd MMMM yyyy"));
-                    //TempContent = Regex.Replace(TempContent, "txtReqBy", model.EmpName);
-                    //TempContent = Regex.Replace(TempContent, "txtReqDate", model.strRequisitionDate);
-                    //TempContent = Regex.Replace(TempContent, "txtSapOrg", model.SapOrgName);
-                    //if (model.ClientName == "") { TempContent = Regex.Replace(TempContent, "txtClientName", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtClientName", model.ClientName); }
-                    //if (model.BrandName == "") { TempContent = Regex.Replace(TempContent, "txtBrand", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtBrand", model.BrandName); }
-                    //if (model.OtherCategory == "") { TempContent = Regex.Replace(TempContent, "txtOtherCat", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtOtherCat", model.OtherCategory); }
-                    //TempContent = Regex.Replace(TempContent, "txtBillable", model.Billable);
-                    //if (model.JobNo == "") { TempContent = Regex.Replace(TempContent, "txtJobNo", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtJobNo", model.JobNo); }
-                    //TempContent = Regex.Replace(TempContent, "txtClientPO", model.ClientPO);
-                    //TempContent = Regex.Replace(TempContent, "txtTrvlTyp", model.TrvlBookingBy);
-                    //TempContent = Regex.Replace(TempContent, "txtFromDate", model.strTrvlFrmDate);
-                    //TempContent = Regex.Replace(TempContent, "txtToDate", model.strTrvlToDate);
-                    //string PrefDeptTime = model.DeptTimeFrom + " - " + model.DeptTimeTo;
-                    //TempContent = Regex.Replace(TempContent, "txtPrefDeptTime", PrefDeptTime);
-                    //string PrefArrTime = model.ArrvlTimeFrom + " - " + model.ArrvlTimeTo;
-                    //TempContent = Regex.Replace(TempContent, "txtPrefArrvlTime", PrefArrTime);
-                    //TempContent = Regex.Replace(TempContent, "txtLocation", model.TrvlLocation);
-                    //string TravelPref = model.strTrvlPrefAir + model.strTrvlPrefHotel + model.strTrvlPrefCar;
-                    //TempContent = Regex.Replace(TempContent, "txtTrvlPref", TravelPref);
-                    //if (model.TrvlDescription == "") { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", model.TrvlDescription); }
-                    //TempContent = Regex.Replace(TempContent, "txtSbmt2CtHD", model.SbmtToCtHdName);
-                    //TempContent = Regex.Replace(TempContent, "txtApprovedBy", model.ApprovedBy);
-                    //TempContent = Regex.Replace(TempContent, "txtApprovalDate", model.ApprovalDate);
-
-                    //StringBuilder sb = new StringBuilder();                                        
-                    //StringReader sr = new StringReader(TempContent);
-                    TextReader textReader = new StringReader(Content);
-                    string dateTime = DateTime.Now.ToString("ddMMyy-HHmmffff");
-
-                    //create pdf file in a folder
-                    string folderName = "produced-pdf";
-                    string fileName = dateTime + ".pdf";
-                    string tPath = Path.Combine(webRootPath, folderName);
-                    string fullPath = Path.Combine(tPath, fileName);
-                    //StringWriter sw = new StringWriter();
-                    var output = new FileStream(fullPath, FileMode.Create);
-                    Document pdfDoc = new Document(PageSize.A4, 10F, 10F, 10F, 10F);
-                    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
-
-                    iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, output);
-                    pdfDoc.Open();
-                    //htmlparser.Parse(sr);
-                    htmlparser.Parse(textReader);
-                    pdfDoc.Close();
-
-                    var memory = new MemoryStream();
-                    using (var stream = new FileStream(fullPath, FileMode.Open))
+                    //getting the root path
+                    string webRootPath = hostingEnv.WebRootPath;
+                    string PathWithFolder = Path.Combine(webRootPath, "html");
+                    string HtmlFileName = "InvoiceBill.html";
+                    //get html filepath with directory                
+                    string fullFilePath = Path.Combine(PathWithFolder, HtmlFileName);
+                    using (StreamReader Reader = new StreamReader(fullFilePath))
                     {
-                        await stream.CopyToAsync(memory);
+                        //TravelRequisitionModel model = trvlReqRepository.GetTrvlReqDetailViewByReqID(TrvlReqID, configuration);
+                        string TempContent = null;
+                        string Content = Reader.ReadToEnd();
+                        string blank = "---";
+                        //replaced by dynamic data
+                        //TempContent = Regex.Replace(Content, "txtReqID", model.TravelReqID.ToString());
+                        //TempContent = Regex.Replace(TempContent, "txtLetterGenDate", DateTime.Now.ToString("dddd, dd MMMM yyyy"));
+                        //TempContent = Regex.Replace(TempContent, "txtReqBy", model.EmpName);
+                        //TempContent = Regex.Replace(TempContent, "txtReqDate", model.strRequisitionDate);
+                        //TempContent = Regex.Replace(TempContent, "txtSapOrg", model.SapOrgName);
+                        //if (model.ClientName == "") { TempContent = Regex.Replace(TempContent, "txtClientName", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtClientName", model.ClientName); }
+                        //if (model.BrandName == "") { TempContent = Regex.Replace(TempContent, "txtBrand", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtBrand", model.BrandName); }
+                        //if (model.OtherCategory == "") { TempContent = Regex.Replace(TempContent, "txtOtherCat", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtOtherCat", model.OtherCategory); }
+                        //TempContent = Regex.Replace(TempContent, "txtBillable", model.Billable);
+                        //if (model.JobNo == "") { TempContent = Regex.Replace(TempContent, "txtJobNo", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtJobNo", model.JobNo); }
+                        //TempContent = Regex.Replace(TempContent, "txtClientPO", model.ClientPO);
+                        //TempContent = Regex.Replace(TempContent, "txtTrvlTyp", model.TrvlBookingBy);
+                        //TempContent = Regex.Replace(TempContent, "txtFromDate", model.strTrvlFrmDate);
+                        //TempContent = Regex.Replace(TempContent, "txtToDate", model.strTrvlToDate);
+                        //string PrefDeptTime = model.DeptTimeFrom + " - " + model.DeptTimeTo;
+                        //TempContent = Regex.Replace(TempContent, "txtPrefDeptTime", PrefDeptTime);
+                        //string PrefArrTime = model.ArrvlTimeFrom + " - " + model.ArrvlTimeTo;
+                        //TempContent = Regex.Replace(TempContent, "txtPrefArrvlTime", PrefArrTime);
+                        //TempContent = Regex.Replace(TempContent, "txtLocation", model.TrvlLocation);
+                        //string TravelPref = model.strTrvlPrefAir + model.strTrvlPrefHotel + model.strTrvlPrefCar;
+                        //TempContent = Regex.Replace(TempContent, "txtTrvlPref", TravelPref);
+                        //if (model.TrvlDescription == "") { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", model.TrvlDescription); }
+                        //TempContent = Regex.Replace(TempContent, "txtSbmt2CtHD", model.SbmtToCtHdName);
+                        //TempContent = Regex.Replace(TempContent, "txtApprovedBy", model.ApprovedBy);
+                        //TempContent = Regex.Replace(TempContent, "txtApprovalDate", model.ApprovalDate);
+
+                        //StringBuilder sb = new StringBuilder();                                        
+                        //StringReader sr = new StringReader(TempContent);
+                        TextReader textReader = new StringReader(Content);
+                        string dateTime = DateTime.Now.ToString("ddMMyy-HHmmffff");
+
+                        //create pdf file in a folder
+                        string folderName = "produced-pdf";
+                        string fileName = dateTime + ".pdf";
+                        string tPath = Path.Combine(webRootPath, folderName);
+                        string fullPath = Path.Combine(tPath, fileName);
+                        //StringWriter sw = new StringWriter();
+                        var output = new FileStream(fullPath, FileMode.Create);
+                        Document pdfDoc = new Document(PageSize.A4, 10F, 10F, 10F, 10F);
+                        HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+
+                        iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, output);
+                        pdfDoc.Open();
+                        //htmlparser.Parse(sr);
+                        htmlparser.Parse(textReader);
+                        pdfDoc.Close();
+
+                        var memory = new MemoryStream();
+                        using (var stream = new FileStream(fullPath, FileMode.Open))
+                        {
+                            await stream.CopyToAsync(memory);
+                        }
+                        memory.Position = 0;
+                        var ext = Path.GetExtension(fullPath).ToLowerInvariant();
+                        return File(memory, GetMimeTypes()[ext], Path.GetFileName(fullPath));
                     }
-                    memory.Position = 0;
-                    var ext = Path.GetExtension(fullPath).ToLowerInvariant();
-                    return File(memory, GetMimeTypes()[ext], Path.GetFileName(fullPath));
+                }
+                else
+                {
+                    return Redirect("/User/Login");
                 }
             }
             catch (Exception ex)
@@ -525,12 +538,18 @@ namespace ERPMEDICAL.Controllers
                     var invoiceDetails = _Context.InvoiceBillDetails.Where(x => x.BillId == id).ToList();
                     foreach (var item in invoiceDetails)
                     {
+                        //stock remove
+                        Stock stck = _Context.Stock.FirstOrDefault(st => st.ProductId == item.ProductId);
+                        _Context.Stock.Remove(stck);
+                        _Context.SaveChanges();
+                        //invoice detailsremove
                         _Context.InvoiceBillDetails.Remove(item);
                         _Context.SaveChanges();
                     }
-                    var context = _Context.InvoiceBill.FirstOrDefault(x => x.Id == id);
+                    var context = _Context.InvoiceBill.FirstOrDefault(x => x.InvoiceNo == id);
                     _Context.InvoiceBill.Remove(context);
                     _Context.SaveChanges();
+
                     return RedirectToAction(nameof(Index));
                 }
                 else

@@ -109,7 +109,14 @@
                     toastr.error("Customer name can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
                     return false;
                 }                
-
+                if (document.getElementById("txtMobileNo").value === '') {
+                    toastr.error("Mobile No can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    return false;
+                }    
+                if (document.getElementById("txtState").value === '') {
+                    toastr.error("Customer State can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    return false;
+                }    
                 return true;
             }
         }

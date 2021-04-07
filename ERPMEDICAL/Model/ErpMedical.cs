@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CoreModel.Model
+namespace ERPMEDICAL.Model
 {
     public partial class ErpMedical : DbContext
     {
@@ -538,8 +538,6 @@ namespace CoreModel.Model
                 entity.Property(e => e.SgstPercentage)
                     .HasColumnName("sgstPercentage")
                     .HasColumnType("decimal(8,2)");
-
-                entity.Property(e => e.StockQty).HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<Product>(entity =>

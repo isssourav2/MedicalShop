@@ -26,7 +26,7 @@
                             <input type="text" class="form-control" id="txtProductName" name="txtProductName" value="@Model.ProductName" placeholder="Enter product name" autocomplete="off">
                         </div>
                         <div class="col-md-3 form-group">
-                            <label>HSN Code</label>
+                            <label>HSN Code <span style="color:red">*</span></label>
                             <input type="text" class="form-control" id="txtHsnCode" name="txtHsnCode" value="@Model.HsnCode" placeholder="Enter HSN code" autocomplete="off">
                         </div>
                         <div class="col-md-3 form-group">
@@ -40,48 +40,48 @@
                         </div>
 
                         <div class="col-md-4 form-group">
-                            <label>Product Package</label>
+                            <label>Product Package <span style="color:red">*</span></label>
                             <input type="text" class="form-control" id="txtProPackage" name="txtProPackage" value="@Model.Package" placeholder="Enter product package" autocomplete="off">
                         </div>
 
-                        <div class="col-md-4 form-group">
-                            <label>Sales Price</label>
-                            <input type="text" class="form-control" id="txtSalesPrice" name="txtSalesPrice" value="@Model.SalesPrice" placeholder="Enter sales price" autocomplete="off">
-                        </div>
 
-                        <div class="col-md-4 form-group">s
+                        <div class="col-md-4 form-group">
                             <label>Unit</label>
                             <input type="text" class="form-control" id="txtUnit" name="txtUnit" value="@Model.Unit" placeholder="Enter unit" autocomplete="off">
                         </div>
 
                         <div class="col-md-4 form-group">
-                            <label>MRP</label>
+                            <label>MRP <span style="color:red">*</span></label>
                             <input type="number" class="form-control" id="txtMRP" name="txtMRP" value="@Model.Mrp" placeholder="Enter MRP" autocomplete="off">
                         </div>
 
                         <div class="col-md-3 form-group">
-                            <label>Rate</label>
-                            <input type="number" class="form-control" id="txtRate" name="txtRate" value="@Model.Rate" placeholder="Enter rate" autocomplete="off">
+                            <label>Purchase Price <span style="color:red">*</span>  </label>
+                            <input type="number" class="form-control" id="txtRate" name="txtRate" value="@Model.Rate" placeholder="Enter Purchase Price" autocomplete="off">
                         </div>
 
                         <div class="col-md-3 form-group">
                             <label>Discount</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtDiscount" name="txtDiscount" value="@Model.Discount" placeholder="Enter discount" autocomplete="off">            
+                            <input type="number" class="form-control" id="txtDiscount" name="txtDiscount" value="@Model.Discount" placeholder="Enter discount" autocomplete="off">
                         </div>
 
                         <div class="col-md-2 form-group">
                             <label>CGST</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtCgstPer" name="txtCgstPer" value="@Model.CgstPer" placeholder="CGST Percentage">        
+                            <input type="number" class="form-control" id="txtCgstPer" name="txtCgstPer" value="@Model.CgstPer" placeholder="CGST Percentage">
                         </div>
 
                         <div class="col-md-2 form-group">
                             <label>SGST</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtSgstPer" name="txtSgstPer" value="@Model.SgstPer" placeholder="SGST amount">              
+                            <input type="number" class="form-control" id="txtSgstPer" name="txtSgstPer" value="@Model.SgstPer" placeholder="SGST amount">
                         </div>
 
                         <div class="col-md-2 form-group">
                             <label>IGST</label><span>% (optional)</span>
-                            <input type="number" class="form-control" id="txtIgstPer" name="txtIgstPer" value="@Model.IgstPer" placeholder="IGST amount">               
+                            <input type="number" class="form-control" id="txtIgstPer" name="txtIgstPer" value="@Model.IgstPer" placeholder="IGST amount">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Sales Price <span style="color:red">*</span></label>
+                            <input type="number" class="form-control" id="txtSalesPrice" name="SalesPrice" value="@Model.SalesPrice" placeholder="Enter Sales Price" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">

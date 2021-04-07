@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CoreModel.Model
+namespace ERPMEDICAL.Model
 {
     public partial class Product
     {

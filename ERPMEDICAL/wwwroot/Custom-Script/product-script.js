@@ -14,7 +14,8 @@
         document.getElementById("txtDiscount").value = '';
         document.getElementById("txtCgstPer").value = '',
         document.getElementById("txtSgstPer").value = '',
-        document.getElementById("txtIgstPer").value = ''
+            document.getElementById("txtIgstPer").value = '',
+            document.getElementById("txtSalesPrice").value = ''
     }
    
     const vm = new Vue({
@@ -54,7 +55,8 @@
                         Discount: document.getElementById("txtDiscount").value,
                         CgstPer: document.getElementById("txtCgstPer").value,
                         SgstPer: document.getElementById("txtSgstPer").value,
-                        IgstPer: document.getElementById("txtIgstPer").value
+                        IgstPer: document.getElementById("txtIgstPer").value,
+                        SalesPrice: document.getElementById("txtSalesPrice").value
                     }
 
                     //console.log("Product Detail: ", productDetail);
@@ -136,7 +138,8 @@
                 document.getElementById("txtDiscount").value = productDetail.discount,
                 document.getElementById("txtCgstPer").value = productDetail.CgstPer,
                 document.getElementById("txtSgstPer").value = productDetail.SgstPer,
-                document.getElementById("txtIgstPer").value = productDetail.IgstPer
+                    document.getElementById("txtIgstPer").value = productDetail.IgstPer,
+                    document.getElementById("txtSalesPrice").value = productDetail.SalesPrice
             },
 
             //DeleteProduct: function (productID) {
@@ -171,6 +174,32 @@
             ValidateProductForm: function () {
                 if (document.getElementById("txtProductName").value === '') {                    
                     toastr.error("Product name can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    document.getElementById("txtProductName").focus();
+                    return false;
+                }
+                if (document.getElementById("txtHsnCode").value === '') {
+                    toastr.error("Hsn Code can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    document.getElementById("txtHsnCode").focus();
+                    return false;
+                }
+                if (document.getElementById("txtProPackage").value === '') {
+                    toastr.error("Product Package can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    document.getElementById("txtProPackage").focus();
+                    return false;
+                }
+                if (document.getElementById("txtMRP").value === '') {
+                    toastr.error("MRP rate can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    document.getElementById("txtMRP").focus();
+                    return false;
+                }
+                if (document.getElementById("txtRate").value === '') {
+                    toastr.error("Puchase Price can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    document.getElementById("txtRate").focus();
+                    return false;
+                }
+                if (document.getElementById("txtSalesPrice").value === '') {
+                    toastr.error("Sales Price can't be left blank", "INVALID INPUT", { positionClass: 'toast-top-center', containerId: 'toast-top-center', "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 5000 });
+                    document.getElementById("txtSalesPrice").focus();
                     return false;
                 }
 

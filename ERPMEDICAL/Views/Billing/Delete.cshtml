@@ -27,7 +27,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <a href="@Url.Action("ConfirmDelete", "Billing",new { Id=Model.InvoiceBill.Id })" class="btn btn-danger"><i class="fa fa-trash-o"></i></a> |
+        <a href="@Url.Action("ConfirmDelete", "Billing",new { Id=Model.InvoiceBill.InvoiceNo })" class="btn btn-danger"><i class="fa fa-trash-o"></i></a> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

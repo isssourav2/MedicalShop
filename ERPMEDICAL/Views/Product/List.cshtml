@@ -27,27 +27,29 @@
                     <th>HSN Code</th>
                     <th>Package</th>
                     <th>MRP</th>
-                    <th>Rate</th>
+                    <th>Purchase Rate</th>
+                    <th>Sales Rate</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in ViewBag.productList)
                 {
-                    <tr>
-                        <td>@item.ProductName</td>
-                        <td>@item.HsnCode</td>
-                        <td>@item.Package</td>
-                        <td>@item.Mrp</td>
-                        <td>@item.Rate</td>
-                        <td>
-                            <center>
-                                @*<button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
-                                <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("ManageProduct", "Product", new { ProductID=item.Id})'"><i class="fa fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger" onclick="DeleteProductByID(@item.Id)"><i class="fa fa-trash-o"></i></button>
-                            </center>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.HsnCode</td>
+                    <td>@item.Package</td>
+                    <td>@item.Mrp</td>
+                    <td>@item.Rate</td>
+                    <td>@item.SalesPrice</td>
+                    <td>
+                        <center>
+                            @*<button type="button" class="btn btn-info"><i class="fa fa-eye"></i></button>*@
+                            <button type="button" class="btn btn-info" onclick="window.location.href='@Url.Action("ManageProduct", "Product", new { ProductID=item.Id})'"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" onclick="DeleteProductByID(@item.Id)"><i class="fa fa-trash-o"></i></button>
+                        </center>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

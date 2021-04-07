@@ -287,6 +287,30 @@ $(document).ready(function () {
             //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
             //     vm.onchangeTaxValueChange(newVal);
             //}
+            'purchaseOrderItem.Discount'(newVal) {
+                let taxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+                let beforeTaxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) - taxvalue);
+                vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+                // this.purchaseOrderItem.TaxValue = (this.purchaseOrderItem.Rate + taxvalue).toFixed(2);
+                //let beforeTaxvalue = this.purchaseOrderItem.taxvalue;
+                //change amount with tax
+                let cgstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.CgstPercentage / 100));
+                //sgst amount
+                let sgstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.SgstPercentage / 100));
+                //igst amount
+                let igstAmount = (beforeTaxvalue.toFixed(2) * (this.purchaseOrderItem.IgstPercentage / 100));
+
+
+                this.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+                this.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
+                this.purchaseOrderItem.Igst = igstAmount.toFixed(2);
+                debugger
+                //Amount value
+                this.purchaseOrderItem.Amount = (parseFloat(this.purchaseOrderItem.Cgst) +
+                    parseFloat(this.purchaseOrderItem.Sgst) +
+                    parseFloat(this.purchaseOrderItem.Igst) +
+                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+            }
         },
         destroyed: function () {
 
@@ -812,7 +836,7 @@ $(document).ready(function () {
                 this.updatePurchaseOrderItem = false;
             },
 
-                 //validate doctor detail form
+                 
             ValidatePurchaseOrderForm: function () {
                 debugger;
                 if (document.getElementById("txtOrderDate").value === '') {
