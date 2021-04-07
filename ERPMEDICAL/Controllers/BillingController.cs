@@ -418,54 +418,57 @@ namespace ERPMEDICAL.Controllers
         {
             try
             {
-                //getting the root path
-                string webRootPath = hostingEnv.WebRootPath;
+                User user = SessionHelper.GetObjectFromJson<User>(HttpContext.Session, "userObject");
+                if (user != null)
+                {
+                    //getting the root path
+                    string webRootPath = hostingEnv.WebRootPath;
                 string PathWithFolder = Path.Combine(webRootPath, "html");
                 string HtmlFileName = "InvoiceBill.html";
                 //get html filepath with directory                
                 string fullFilePath = Path.Combine(PathWithFolder, HtmlFileName);
-                using (StreamReader Reader = new StreamReader(fullFilePath))
-                {
-                    //TravelRequisitionModel model = trvlReqRepository.GetTrvlReqDetailViewByReqID(TrvlReqID, configuration);
-                    string TempContent = null;
-                    string Content = Reader.ReadToEnd();
-                    string blank = "---";
-                    //replaced by dynamic data
-                    TempContent = Regex.Replace(Content, "#CustGSTNo#", "01254825");
-                    TempContent = Regex.Replace(TempContent, "#DLNo#", "DL565214");
-                    //TempContent = Regex.Replace(TempContent, "txtReqBy", model.EmpName);
-                    //TempContent = Regex.Replace(TempContent, "txtReqDate", model.strRequisitionDate);
-                    //TempContent = Regex.Replace(TempContent, "txtSapOrg", model.SapOrgName);
-                    //if (model.ClientName == "") { TempContent = Regex.Replace(TempContent, "txtClientName", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtClientName", model.ClientName); }
-                    //if (model.BrandName == "") { TempContent = Regex.Replace(TempContent, "txtBrand", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtBrand", model.BrandName); }
-                    //if (model.OtherCategory == "") { TempContent = Regex.Replace(TempContent, "txtOtherCat", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtOtherCat", model.OtherCategory); }
-                    //TempContent = Regex.Replace(TempContent, "txtBillable", model.Billable);
-                    //if (model.JobNo == "") { TempContent = Regex.Replace(TempContent, "txtJobNo", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtJobNo", model.JobNo); }
-                    //TempContent = Regex.Replace(TempContent, "txtClientPO", model.ClientPO);
-                    //TempContent = Regex.Replace(TempContent, "txtTrvlTyp", model.TrvlBookingBy);
-                    //TempContent = Regex.Replace(TempContent, "txtFromDate", model.strTrvlFrmDate);
-                    //TempContent = Regex.Replace(TempContent, "txtToDate", model.strTrvlToDate);
-                    //string PrefDeptTime = model.DeptTimeFrom + " - " + model.DeptTimeTo;
-                    //TempContent = Regex.Replace(TempContent, "txtPrefDeptTime", PrefDeptTime);
-                    //string PrefArrTime = model.ArrvlTimeFrom + " - " + model.ArrvlTimeTo;
-                    //TempContent = Regex.Replace(TempContent, "txtPrefArrvlTime", PrefArrTime);
-                    //TempContent = Regex.Replace(TempContent, "txtLocation", model.TrvlLocation);
-                    //string TravelPref = model.strTrvlPrefAir + model.strTrvlPrefHotel + model.strTrvlPrefCar;
-                    //TempContent = Regex.Replace(TempContent, "txtTrvlPref", TravelPref);
-                    //if (model.TrvlDescription == "") { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", blank); }
-                    //else { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", model.TrvlDescription); }
-                    //TempContent = Regex.Replace(TempContent, "txtSbmt2CtHD", model.SbmtToCtHdName);
-                    //TempContent = Regex.Replace(TempContent, "txtApprovedBy", model.ApprovedBy);
-                    //TempContent = Regex.Replace(TempContent, "txtApprovalDate", model.ApprovalDate);
+                    using (StreamReader Reader = new StreamReader(fullFilePath))
+                    {
+                        //TravelRequisitionModel model = trvlReqRepository.GetTrvlReqDetailViewByReqID(TrvlReqID, configuration);
+                        string TempContent = null;
+                        string Content = Reader.ReadToEnd();
+                        string blank = "---";
+                        //replaced by dynamic data
+                        TempContent = Regex.Replace(Content, "#CustGSTNo#", "01254825");
+                        TempContent = Regex.Replace(TempContent, "#DLNo#", "DL565214");
+                        //TempContent = Regex.Replace(TempContent, "txtReqBy", model.EmpName);
+                        //TempContent = Regex.Replace(TempContent, "txtReqDate", model.strRequisitionDate);
+                        //TempContent = Regex.Replace(TempContent, "txtSapOrg", model.SapOrgName);
+                        //if (model.ClientName == "") { TempContent = Regex.Replace(TempContent, "txtClientName", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtClientName", model.ClientName); }
+                        //if (model.BrandName == "") { TempContent = Regex.Replace(TempContent, "txtBrand", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtBrand", model.BrandName); }
+                        //if (model.OtherCategory == "") { TempContent = Regex.Replace(TempContent, "txtOtherCat", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtOtherCat", model.OtherCategory); }
+                        //TempContent = Regex.Replace(TempContent, "txtBillable", model.Billable);
+                        //if (model.JobNo == "") { TempContent = Regex.Replace(TempContent, "txtJobNo", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtJobNo", model.JobNo); }
+                        //TempContent = Regex.Replace(TempContent, "txtClientPO", model.ClientPO);
+                        //TempContent = Regex.Replace(TempContent, "txtTrvlTyp", model.TrvlBookingBy);
+                        //TempContent = Regex.Replace(TempContent, "txtFromDate", model.strTrvlFrmDate);
+                        //TempContent = Regex.Replace(TempContent, "txtToDate", model.strTrvlToDate);
+                        //string PrefDeptTime = model.DeptTimeFrom + " - " + model.DeptTimeTo;
+                        //TempContent = Regex.Replace(TempContent, "txtPrefDeptTime", PrefDeptTime);
+                        //string PrefArrTime = model.ArrvlTimeFrom + " - " + model.ArrvlTimeTo;
+                        //TempContent = Regex.Replace(TempContent, "txtPrefArrvlTime", PrefArrTime);
+                        //TempContent = Regex.Replace(TempContent, "txtLocation", model.TrvlLocation);
+                        //string TravelPref = model.strTrvlPrefAir + model.strTrvlPrefHotel + model.strTrvlPrefCar;
+                        //TempContent = Regex.Replace(TempContent, "txtTrvlPref", TravelPref);
+                        //if (model.TrvlDescription == "") { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", blank); }
+                        //else { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", model.TrvlDescription); }
+                        //TempContent = Regex.Replace(TempContent, "txtSbmt2CtHD", model.SbmtToCtHdName);
+                        //TempContent = Regex.Replace(TempContent, "txtApprovedBy", model.ApprovedBy);
+                        //TempContent = Regex.Replace(TempContent, "txtApprovalDate", model.ApprovalDate);
 
-                    //StringBuilder sb = new StringBuilder();                                        
-                    //StringReader sr = new StringReader(TempContent);
-                    TextReader textReader = new StringReader(TempContent);
-                    string dateTime = DateTime.Now.ToString("ddMMyy-HHmmffff");
+                        //StringBuilder sb = new StringBuilder();                                        
+                        //StringReader sr = new StringReader(TempContent);
+                        TextReader textReader = new StringReader(TempContent);
+                        string dateTime = DateTime.Now.ToString("ddMMyy-HHmmffff");
 
                         //create pdf file in a folder
                         string folderName = "produced-pdf";
