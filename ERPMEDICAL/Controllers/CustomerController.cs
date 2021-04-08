@@ -26,6 +26,7 @@ namespace ERPMEDICAL.Controllers
                 {
                     ViewBag.CurrentUser = user;
                     var customerList = Context.Customer.ToList();
+                    
                     ViewBag.customerList = customerList;
                     return View();
                 }
@@ -83,6 +84,7 @@ namespace ERPMEDICAL.Controllers
 
                     //addition in product table
                     model.Baseid = basetable.Id;
+                    model.NullValidation<Customer>();
                     Context.Customer.Add(model);
                     Context.SaveChanges();
                     response.id = model.Id;
@@ -100,18 +102,19 @@ namespace ERPMEDICAL.Controllers
                     //update in customer in customer table.
                     Customer custDetail = Context.Customer.FirstOrDefault(m => m.Id == model.Id);
                     custDetail.Baseid = model.Baseid;
-                    custDetail.Name = model.Name;
-                    custDetail.Address = model.Address;
-                    custDetail.EmailId = model.EmailId;
-                    custDetail.MobileNo = model.MobileNo;
-                    custDetail.DlNo = model.DlNo;
-                    custDetail.VehicelNo = model.VehicelNo;
-                    custDetail.Station = model.Station;
-                    custDetail.MedicalCenter = model.MedicalCenter;
-                    custDetail.ShippedAdress = model.ShippedAdress;
-                    custDetail.State = model.State;
-                    custDetail.StateCode = model.StateCode;
-                    custDetail.GstnCn = model.GstnCn;
+
+                    custDetail.Name = string.IsNullOrEmpty(model.Name)?"": model.Name;
+                    custDetail.Address = string.IsNullOrEmpty(model.Address)?"":model.Address;
+                    custDetail.EmailId = string.IsNullOrEmpty(model.EmailId)?"":model.EmailId;
+                    custDetail.MobileNo = string.IsNullOrEmpty(model.MobileNo)?"":model.MobileNo;
+                    custDetail.DlNo = string.IsNullOrEmpty(model.DlNo)?"":model.DlNo;
+                    custDetail.VehicelNo = string.IsNullOrEmpty(model.VehicelNo)?"":model.VehicelNo;
+                    custDetail.Station = string.IsNullOrEmpty(model.Station)?"":model.Station;
+                    custDetail.MedicalCenter = string.IsNullOrEmpty(model.MedicalCenter)?"":model.MedicalCenter;
+                    custDetail.ShippedAdress = string.IsNullOrEmpty(model.ShippedAdress)?"":model.ShippedAdress;
+                    custDetail.State = string.IsNullOrEmpty(model.State)?"":model.State;
+                    custDetail.StateCode = string.IsNullOrEmpty(model.StateCode)?"":model.StateCode;
+                    custDetail.GstnCn = string.IsNullOrEmpty(model.GstnCn)?"":model.GstnCn;
 
                     Context.Entry(model).CurrentValues.SetValues(custDetail);
                     Context.SaveChanges();

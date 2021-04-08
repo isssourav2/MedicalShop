@@ -71,6 +71,7 @@ namespace ERPMEDICAL.Controllers
                 //Add vendor table
                 vendor.Baseid = basetable.Id;
                 vendor.CompanyId = 1;
+                vendor.NullValidation<Vendor>();
                 _Context.Vendor.Add(vendor);
                 //save changes trigger for saving
                 _Context.SaveChanges();
@@ -95,6 +96,7 @@ namespace ERPMEDICAL.Controllers
             if (user != null)
             {
                 ViewBag.CurrentUser = user;
+               // Vendor vendordetail = _Context.Vendor.FirstOrDefault(O => O.Id == Convert.ToInt32(VendorID));
                 return View();
             }
             else
@@ -123,7 +125,7 @@ namespace ERPMEDICAL.Controllers
                     _Context.SaveChanges();
                     //find entry against id of vendor
                     Vendor vendordetail = _Context.Vendor.FirstOrDefault(O => O.Id == vendor.Id);
-
+                    vendor.NullValidation<Vendor>();
                     //Add vendor table UPDATE
                     vendordetail.Baseid = basetable.Id;
 

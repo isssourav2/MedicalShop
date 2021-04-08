@@ -147,7 +147,7 @@ window.onload = function () {
             },
             onUpdate: function () {
                 let vm = this;
-                //console.log("vendor model data", this.vendor);
+                console.log("vendor model data", this.vendor);
                 var existingVendor = {
                     Id: vm.vendor.id,
                     Name: vm.vendor.name,
