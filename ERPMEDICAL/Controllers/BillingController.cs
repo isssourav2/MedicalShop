@@ -414,7 +414,7 @@ namespace ERPMEDICAL.Controllers
         }
 
         [Obsolete]
-        public async Task<IActionResult> BillDownload()
+        public async Task<IActionResult> BillDownload(int id)
         {
             try
             {
@@ -433,12 +433,23 @@ namespace ERPMEDICAL.Controllers
                         string TempContent = null;
                         string Content = Reader.ReadToEnd();
                         string blank = "---";
+                        //company
+                        var companyRes = _Context.CompanyBranch.FirstOrDefault(com => com.Id == user.CompanyBranchId);
+                        //invoice
+                        var invoice = _Context.InvoiceBill.FirstOrDefault(inv => inv.InvoiceNo == id);
+                        //customer
+                        var customerObj = _Context.Customer.FirstOrDefault(cust => cust.Id == invoice.CustomerId.Value);
                         //replaced by dynamic data
-                        TempContent = Regex.Replace(Content, "#CustGSTNo#", "01254825");
-                        TempContent = Regex.Replace(TempContent, "#DLNo#", "DL565214");
-                        //TempContent = Regex.Replace(TempContent, "txtReqBy", model.EmpName);
-                        //TempContent = Regex.Replace(TempContent, "txtReqDate", model.strRequisitionDate);
-                        //TempContent = Regex.Replace(TempContent, "txtSapOrg", model.SapOrgName);
+                        TempContent = Regex.Replace(Content, "#CustGSTNo#", string.IsNullOrEmpty(companyRes.Gstno)?"": companyRes.Gstno);
+                        TempContent = Regex.Replace(TempContent, "#DLNo#", string.IsNullOrEmpty(companyRes.Dlno) ? "" : companyRes.Dlno);
+                        TempContent = Regex.Replace(TempContent, "#InvoiceNo#", string.IsNullOrEmpty(invoice.InvoiceNo.ToString())?"": invoice.InvoiceNo.ToString());
+                        TempContent = Regex.Replace(TempContent, "#VehicleNo#", "V123456");
+                        TempContent = Regex.Replace(TempContent, "#InvoiceDate#", string.IsNullOrEmpty(invoice.InvoiceDate.Value.ToString())?"": 
+                                                                                                invoice.InvoiceDate.Value.ToString("dd/MM/yyyy"));
+                        TempContent = Regex.Replace(TempContent, "#Station#", "st123456");
+                        TempContent = Regex.Replace(TempContent, "#placeSupply#", string.IsNullOrEmpty(customerObj.Station)?"": customerObj.Station);
+                        TempContent = Regex.Replace(TempContent, "#billTo#", string.IsNullOrEmpty(customerObj.Address)?"": customerObj.Address);
+                        TempContent = Regex.Replace(TempContent, "#custState#", string.IsNullOrEmpty(customerObj.State)?"": customerObj.State);
                         //if (model.ClientName == "") { TempContent = Regex.Replace(TempContent, "txtClientName", blank); }
                         //else { TempContent = Regex.Replace(TempContent, "txtClientName", model.ClientName); }
                         //if (model.BrandName == "") { TempContent = Regex.Replace(TempContent, "txtBrand", blank); }
