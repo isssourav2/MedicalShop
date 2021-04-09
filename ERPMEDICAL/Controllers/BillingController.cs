@@ -422,7 +422,7 @@ namespace ERPMEDICAL.Controllers
                 if (user != null)
                 {
                     //getting the root path
-                    string webRootPath = hostingEnv.WebRootPath;
+                string webRootPath = hostingEnv.WebRootPath;
                 string PathWithFolder = Path.Combine(webRootPath, "html");
                 string HtmlFileName = "InvoiceBill.html";
                 //get html filepath with directory                
