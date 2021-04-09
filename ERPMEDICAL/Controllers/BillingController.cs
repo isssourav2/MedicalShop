@@ -450,29 +450,7 @@ namespace ERPMEDICAL.Controllers
                         TempContent = Regex.Replace(TempContent, "#placeSupply#", string.IsNullOrEmpty(customerObj.Station)?"": customerObj.Station);
                         TempContent = Regex.Replace(TempContent, "#billTo#", string.IsNullOrEmpty(customerObj.Address)?"": customerObj.Address);
                         TempContent = Regex.Replace(TempContent, "#custState#", string.IsNullOrEmpty(customerObj.State)?"": customerObj.State);
-                        //if (model.ClientName == "") { TempContent = Regex.Replace(TempContent, "txtClientName", blank); }
-                        //else { TempContent = Regex.Replace(TempContent, "txtClientName", model.ClientName); }
-                        //if (model.BrandName == "") { TempContent = Regex.Replace(TempContent, "txtBrand", blank); }
-                        //else { TempContent = Regex.Replace(TempContent, "txtBrand", model.BrandName); }
-                        //if (model.OtherCategory == "") { TempContent = Regex.Replace(TempContent, "txtOtherCat", blank); }
-                        //else { TempContent = Regex.Replace(TempContent, "txtOtherCat", model.OtherCategory); }
-                        //TempContent = Regex.Replace(TempContent, "txtBillable", model.Billable);
-                        //if (model.JobNo == "") { TempContent = Regex.Replace(TempContent, "txtJobNo", blank); }
-                        //else { TempContent = Regex.Replace(TempContent, "txtJobNo", model.JobNo); }
-                        //TempContent = Regex.Replace(TempContent, "txtClientPO", model.ClientPO);
-                        //TempContent = Regex.Replace(TempContent, "txtTrvlTyp", model.TrvlBookingBy);
-                        //TempContent = Regex.Replace(TempContent, "txtFromDate", model.strTrvlFrmDate);
-                        //TempContent = Regex.Replace(TempContent, "txtToDate", model.strTrvlToDate);
-                        //string PrefDeptTime = model.DeptTimeFrom + " - " + model.DeptTimeTo;
-                        //TempContent = Regex.Replace(TempContent, "txtPrefDeptTime", PrefDeptTime);
-                        //string PrefArrTime = model.ArrvlTimeFrom + " - " + model.ArrvlTimeTo;
-                        //TempContent = Regex.Replace(TempContent, "txtPrefArrvlTime", PrefArrTime);
-                        //TempContent = Regex.Replace(TempContent, "txtLocation", model.TrvlLocation);
-                        //string TravelPref = model.strTrvlPrefAir + model.strTrvlPrefHotel + model.strTrvlPrefCar;
-                        //TempContent = Regex.Replace(TempContent, "txtTrvlPref", TravelPref);
-                        //if (model.TrvlDescription == "") { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", blank); }
-                        //else { TempContent = Regex.Replace(TempContent, "txtTrvlDesc", model.TrvlDescription); }
-                        //TempContent = Regex.Replace(TempContent, "txtSbmt2CtHD", model.SbmtToCtHdName);
+          
                         //TempContent = Regex.Replace(TempContent, "txtApprovedBy", model.ApprovedBy);
                         //TempContent = Regex.Replace(TempContent, "txtApprovalDate", model.ApprovalDate);
 

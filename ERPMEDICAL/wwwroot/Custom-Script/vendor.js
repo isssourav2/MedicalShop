@@ -49,13 +49,12 @@ window.onload = function () {
             companies:[]
         },
         mounted() {
-            PageLoad(this);
-            debugger;    
-            var vendord = localStorage.getItem("vendordata");
-            if (JSON.parse(vendord)) {
-                [this.vendor] = [JSON.parse(vendord)];
-            }
-            else {
+           // PageLoad(this);
+            //var vendord = localStorage.getItem("vendordata");
+            //if (JSON.parse(vendord)) {
+            //    [this.vendor] = [JSON.parse(vendord)];
+            //}
+            //else {
                 this.vendor = {
                     id: "",
                     companyId: "",
@@ -65,7 +64,7 @@ window.onload = function () {
                     address: "",
                     gstNo: ""
                 }
-            }
+            //}
             
         },
 
@@ -114,11 +113,12 @@ window.onload = function () {
                     $.ajax({ url: "/Vendor", data: newVendor, method: "POST" })
                     .done(function (data) {                       
                         //  PageLoad(this);
-                        $.ajax({ url: "/Vendor", method: "GET" })
-                            .done(function (data) {
-                                //console.log("vendor data", data);
-                                vm.vendors = [...data];
-                            })
+                        console.log("vendor id", data.id);
+                        //$.ajax({ url: "/Vendor", method: "GET" })
+                        //    .done(function (data) {
+                        //        //console.log("vendor data", data);
+                        //        vm.vendors = [...data];
+                        //    })
                         //clear control
                         clearControl();
                         Swal.fire({
@@ -148,9 +148,9 @@ window.onload = function () {
                 let vm = this;
                 
                 [vm.vendor] = [rowValue];
-                localStorage.setItem("vendordata", JSON.stringify(vm.vendor));
+               // localStorage.setItem("vendordata", JSON.stringify(vm.vendor));
                 //Redirect to new page
-                location.replace("/Vendor/Edit");
+                //location.replace("/Vendor/Edit");
                // console.log("Row value", vm.vendor);
             },
 
