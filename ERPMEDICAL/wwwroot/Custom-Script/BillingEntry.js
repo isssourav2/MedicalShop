@@ -158,63 +158,63 @@ const vm = new Vue({
     computed: {
     },
     watch: {
-        //'BillingItem.CgstPercentage'(newVal) {
-        //    let taxvalue = ((this.BillingItem.Qty * this.BillingItem.Rate) * (this.BillingItem.Discount / 100))
-        //    let beforeTaxvalue = (this.BillingItem.Rate + taxvalue);
-        //   // vm.BillingItem.BaseValue = beforeTaxvalue.toFixed(2);
-        //    //cgst amount
-        //    newVal = newVal == undefined ? 0 : newVal;
-        //    vm.BillingItem.CgstPercentage = newVal;
-        //    let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
-        //    //sgst amount
-        //    vm.BillingItem.SgstPercentage = parseFloat(vm.BillingItem.SgstPercentage);
-        //    let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.BillingItem.SgstPercentage) / 100));
+        'BillingItem.CgstPercentage'(newVal) {
+            let taxvalue = ((this.BillingItem.Qty * this.BillingItem.Rate) * (this.BillingItem.Discount / 100))
+            let beforeTaxvalue = (this.BillingItem.Rate + taxvalue);
+           // vm.BillingItem.BaseValue = beforeTaxvalue.toFixed(2);
+            //cgst amount
+            newVal = newVal == undefined ? 0 : newVal;
+            vm.BillingItem.CgstPercentage = newVal;
+            let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+            //sgst amount
+            vm.BillingItem.SgstPercentage = parseFloat(vm.BillingItem.SgstPercentage);
+            let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.BillingItem.SgstPercentage) / 100));
 
-        //    vm.BillingItem.Cgst = cgstAmount.toFixed(2);
-        //    // vm.BillingItem.Sgst = sgstAmount.toFixed(2);
-        //    vm.BillingItem.Amount =
-        //        (parseFloat(vm.BillingItem.Cgst) +
-        //            parseFloat(sgstAmount) +
-        //        parseFloat(vm.BillingItem.BaseValue)).toFixed(2);
-        //},
-        //'BillingItem.SgstPercentage'(newVal) {
-        //    let taxvalue = ((this.BillingItem.Qty * this.BillingItem.Rate) * (this.BillingItem.Discount / 100))
-        //    let beforeTaxvalue = (this.BillingItem.Rate + taxvalue);
-        //  //  vm.BillingItem.BaseValue = beforeTaxvalue.toFixed(2);
-        //    //cgst amount
-        //    vm.BillingItem.CgstPercentage = parseFloat(vm.BillingItem.CgstPercentage);
-        //    let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.BillingItem.CgstPercentage) / 100));
-        //    //sgst amount
+            vm.BillingItem.Cgst = cgstAmount.toFixed(2);
+            // vm.BillingItem.Sgst = sgstAmount.toFixed(2);
+            vm.BillingItem.Amount =
+                (parseFloat(vm.BillingItem.Cgst) +
+                    parseFloat(sgstAmount) +
+                parseFloat(vm.BillingItem.BaseValue)).toFixed(2);
+        },
+        'BillingItem.SgstPercentage'(newVal) {
+            let taxvalue = ((this.BillingItem.Qty * this.BillingItem.Rate) * (this.BillingItem.Discount / 100))
+            let beforeTaxvalue = (this.BillingItem.Rate + taxvalue);
+          //  vm.BillingItem.BaseValue = beforeTaxvalue.toFixed(2);
+            //cgst amount
+            vm.BillingItem.CgstPercentage = parseFloat(vm.BillingItem.CgstPercentage);
+            let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.BillingItem.CgstPercentage) / 100));
+            //sgst amount
 
-        //    newVal = newVal == undefined ? 0 : newVal;
-        //    vm.BillingItem.SgstPercentage = newVal;
-        //    let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+            newVal = newVal == undefined ? 0 : newVal;
+            vm.BillingItem.SgstPercentage = newVal;
+            let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
 
-        //    //vm.BillingItem.Cgst = cgstAmount.toFixed(2);
-        //    vm.BillingItem.Sgst = sgstAmount.toFixed(2);
-        //    vm.BillingItem.Amount =
-        //        (parseFloat(cgstAmount) +
-        //            parseFloat(vm.BillingItem.Sgst) +
-        //        parseFloat(vm.BillingItem.BaseValue)).toFixed(2);
-        //    // vm.onchangeTaxValueChange(newVal);
-        //},
-        //'BillingItem.IgstPercentage'(newVal) {
+            //vm.BillingItem.Cgst = cgstAmount.toFixed(2);
+            vm.BillingItem.Sgst = sgstAmount.toFixed(2);
+            vm.BillingItem.Amount =
+                (parseFloat(cgstAmount) +
+                    parseFloat(vm.BillingItem.Sgst) +
+                parseFloat(vm.BillingItem.BaseValue)).toFixed(2);
+            // vm.onchangeTaxValueChange(newVal);
+        },
+        'BillingItem.IgstPercentage'(newVal) {
 
-        //    let taxvalue = ((this.BillingItem.Qty * this.BillingItem.Rate) * (this.BillingItem.Discount / 100))
-        //    let beforeTaxvalue = (this.BillingItem.Rate + taxvalue);
-        //   // vm.BillingItem.BaseValue = beforeTaxvalue.toFixed(2);
-        //    //igst amount
-        //    //   let percentage = vm.BillingItem.IgstPercentage
-        //    newVal = newVal == undefined ? 0 : newVal == "" ? 0 : newVal;
-        //    vm.BillingItem.IgstPercentage = newVal;
-        //    let igstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
-        //    //vm.BillingItem.Cgst = cgstAmount.toFixed(2);
-        //    vm.BillingItem.Igst = igstAmount.toFixed(2);
-        //    vm.BillingItem.Amount =
-        //        (parseFloat(vm.BillingItem.Igst) +
-        //        parseFloat(vm.BillingItem.BaseValue)).toFixed(2);
-        //    // vm.onchangeTaxValueChange(newVal);
-        //}
+            let taxvalue = ((this.BillingItem.Qty * this.BillingItem.Rate) * (this.BillingItem.Discount / 100))
+            let beforeTaxvalue = (this.BillingItem.Rate + taxvalue);
+           // vm.BillingItem.BaseValue = beforeTaxvalue.toFixed(2);
+            //igst amount
+            //   let percentage = vm.BillingItem.IgstPercentage
+            newVal = newVal == undefined ? 0 : newVal == "" ? 0 : newVal;
+            vm.BillingItem.IgstPercentage = newVal;
+            let igstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+            //vm.BillingItem.Cgst = cgstAmount.toFixed(2);
+            vm.BillingItem.Igst = igstAmount.toFixed(2);
+            vm.BillingItem.Amount =
+                (parseFloat(vm.BillingItem.Igst) +
+                parseFloat(vm.BillingItem.BaseValue)).toFixed(2);
+            // vm.onchangeTaxValueChange(newVal);
+        },
         'BillingItem.Discount'(newVal) {
             let taxvalue = (this.BillingItem.Rate * parseInt(this.BillingItem.Qty)) * (this.BillingItem.Discount / 100);
             let beforeTaxvalue = ((parseInt(this.BillingItem.Qty) * this.BillingItem.Rate) - taxvalue);

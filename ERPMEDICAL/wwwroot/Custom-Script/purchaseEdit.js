@@ -255,63 +255,63 @@ $(document).ready(function () {
             //}
         },
         watch: {
-            //'purchaseOrderItem.CgstPercentage'(newVal) {
-            //    let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
-            //    let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-            //  //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
-            //    //cgst amount
-            //    newVal = newVal == undefined ? 0 : newVal;
-            //    vm.purchaseOrderItem.CgstPercentage = newVal;
-            //    let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
-            //    //sgst amount
-            //    vm.purchaseOrderItem.SgstPercentage = parseFloat(vm.purchaseOrderItem.SgstPercentage);
-            //    let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.SgstPercentage) / 100));
+            'purchaseOrderItem.CgstPercentage'(newVal) {
+                let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
+              //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+                //cgst amount
+                newVal = newVal == undefined ? 0 : newVal;
+                vm.purchaseOrderItem.CgstPercentage = newVal;
+                let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+                //sgst amount
+                vm.purchaseOrderItem.SgstPercentage = parseFloat(vm.purchaseOrderItem.SgstPercentage);
+                let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.SgstPercentage) / 100));
 
-            //    vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
-            //    // vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
-            //    vm.purchaseOrderItem.Amount =
-            //        (parseFloat(vm.purchaseOrderItem.Cgst) +
-            //            parseFloat(sgstAmount) +
-            //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-            //},
-            //'purchaseOrderItem.SgstPercentage'(newVal) {
-            //    let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
-            //    let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-            //  //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
-            //    //cgst amount
-            //    vm.purchaseOrderItem.CgstPercentage = parseFloat(vm.purchaseOrderItem.CgstPercentage);
-            //    let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.CgstPercentage) / 100));
-            //    //sgst amount
+                vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+                // vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
+                vm.purchaseOrderItem.Amount =
+                    (parseFloat(vm.purchaseOrderItem.Cgst) +
+                        parseFloat(sgstAmount) +
+                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+            },
+            'purchaseOrderItem.SgstPercentage'(newVal) {
+                let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
+              //  vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+                //cgst amount
+                vm.purchaseOrderItem.CgstPercentage = parseFloat(vm.purchaseOrderItem.CgstPercentage);
+                let cgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(vm.purchaseOrderItem.CgstPercentage) / 100));
+                //sgst amount
                
-            //    newVal = newVal == undefined ? 0 : newVal;
-            //    vm.purchaseOrderItem.SgstPercentage = newVal;
-            //    let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+                newVal = newVal == undefined ? 0 : newVal;
+                vm.purchaseOrderItem.SgstPercentage = newVal;
+                let sgstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
 
-            //    //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
-            //    vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
-            //    vm.purchaseOrderItem.Amount =
-            //        (parseFloat(cgstAmount) +
-            //            parseFloat(vm.purchaseOrderItem.Sgst) +
-            //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-            //    // vm.onchangeTaxValueChange(newVal);
-            //},
-            //'purchaseOrderItem.IgstPercentage'(newVal) {
+                //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+                vm.purchaseOrderItem.Sgst = sgstAmount.toFixed(2);
+                vm.purchaseOrderItem.Amount =
+                    (parseFloat(cgstAmount) +
+                        parseFloat(vm.purchaseOrderItem.Sgst) +
+                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+                // vm.onchangeTaxValueChange(newVal);
+            },
+            'purchaseOrderItem.IgstPercentage'(newVal) {
                
-            //    let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
-            //    let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
-            // //   vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
-            //    //igst amount
-            // //   let percentage = vm.purchaseOrderItem.IgstPercentage
-            //    newVal = newVal == undefined ? 0 : newVal == "" ? 0 : newVal;
-            //    vm.purchaseOrderItem.IgstPercentage = newVal;
-            //    let igstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
-            //    //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
-            //    vm.purchaseOrderItem.Igst = igstAmount.toFixed(2);
-            //    vm.purchaseOrderItem.Amount =
-            //        (parseFloat(vm.purchaseOrderItem.Igst) +
-            //        parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
-            //    // vm.onchangeTaxValueChange(newVal);
-            //}
+                let taxvalue = ((this.purchaseOrderItem.Qty * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
+                let beforeTaxvalue = (this.purchaseOrderItem.Rate + taxvalue);
+             //   vm.purchaseOrderItem.TaxValue = beforeTaxvalue.toFixed(2);
+                //igst amount
+             //   let percentage = vm.purchaseOrderItem.IgstPercentage
+                newVal = newVal == undefined ? 0 : newVal == "" ? 0 : newVal;
+                vm.purchaseOrderItem.IgstPercentage = newVal;
+                let igstAmount = (beforeTaxvalue.toFixed(2) * (parseFloat(newVal) / 100));
+                //vm.purchaseOrderItem.Cgst = cgstAmount.toFixed(2);
+                vm.purchaseOrderItem.Igst = igstAmount.toFixed(2);
+                vm.purchaseOrderItem.Amount =
+                    (parseFloat(vm.purchaseOrderItem.Igst) +
+                    parseFloat(beforeTaxvalue.toFixed(2))).toFixed(2);
+                // vm.onchangeTaxValueChange(newVal);
+            },
             'purchaseOrderItem.Discount'(newVal) {
                 let taxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) * (this.purchaseOrderItem.Discount / 100))
                 let beforeTaxvalue = ((parseInt(this.purchaseOrderItem.Qty) * this.purchaseOrderItem.Rate) - taxvalue);
